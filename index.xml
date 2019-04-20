@@ -17,7 +17,7 @@
       <pubDate>Sat, 20 Apr 2019 15:37:58 +0800</pubDate>
       
       <guid>https://janzhen.github.io/post/migration/</guid>
-      <description>Jekyll、hexo、pelican……现在又迁移到 Hugo 了。</description>
+      <description>从 Jekyll 到 hexo，现在又迁移到 Hugo 了。在我看来，Hugo 的优势不需要安装一大堆依赖，安装完 Hugo 本身之后马上就可以用了。 写了个简单的 Makefile</description>
     </item>
     
   </channel>

@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Jan Zhen" /><meta name="description" content="Jekyll、hexo、pelican……现在又迁移到 Hugo 了。" /><meta name="keywords" content="coding" />
+<meta name="author" content="Jan Zhen" /><meta name="description" content="从 Jekyll 到 hexo，现在又迁移到 Hugo 了。在我看来，Hugo 的优势不需要安装一大堆依赖，安装完 Hugo 本身之后马上就可以用了。 写了个简单的 Makefile" /><meta name="keywords" content="coding" />
 
 
 
@@ -39,26 +39,26 @@
 
 
 <meta property="og:title" content="迁移到 Hugo" />
-<meta property="og:description" content="Jekyll、hexo、pelican……现在又迁移到 Hugo 了。" />
+<meta property="og:description" content="从 Jekyll 到 hexo，现在又迁移到 Hugo 了。在我看来，Hugo 的优势不需要安装一大堆依赖，安装完 Hugo 本身之后马上就可以用了。 写了个简单的 Makefile" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://janzhen.github.io/post/migration/" />
 <meta property="article:published_time" content="2019-04-20T15:37:58&#43;08:00"/>
 <meta property="article:modified_time" content="2019-04-20T15:37:58&#43;08:00"/>
 
 <meta itemprop="name" content="迁移到 Hugo">
-<meta itemprop="description" content="Jekyll、hexo、pelican……现在又迁移到 Hugo 了。">
+<meta itemprop="description" content="从 Jekyll 到 hexo，现在又迁移到 Hugo 了。在我看来，Hugo 的优势不需要安装一大堆依赖，安装完 Hugo 本身之后马上就可以用了。 写了个简单的 Makefile">
 
 
 <meta itemprop="datePublished" content="2019-04-20T15:37:58&#43;08:00" />
 <meta itemprop="dateModified" content="2019-04-20T15:37:58&#43;08:00" />
-<meta itemprop="wordCount" content="30">
+<meta itemprop="wordCount" content="244">
 
 
 
 <meta itemprop="keywords" content="" />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="迁移到 Hugo"/>
-<meta name="twitter:description" content="Jekyll、hexo、pelican……现在又迁移到 Hugo 了。"/>
+<meta name="twitter:description" content="从 Jekyll 到 hexo，现在又迁移到 Hugo 了。在我看来，Hugo 的优势不需要安装一大堆依赖，安装完 Hugo 本身之后马上就可以用了。 写了个简单的 Makefile"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -137,8 +137,50 @@
   </div>
 </div>
     <div class="post-content">
-      <p>Jekyll、hexo、pelican……现在又迁移到 Hugo 了。</p>
+      <p>从 Jekyll 到 hexo，现在又迁移到 Hugo 了。在我看来，Hugo 的优势不需要安装一大堆依赖，安装完 Hugo 本身之后马上就可以用了。</p>
 
+<p>写了个简单的 Makefile，方便操作，也防止忘记了 hugo 命令和流程。其中，deploy 参考了 Hugo 提供的托管到 github 的最佳实践：<a href="https://gohugo.io/hosting-and-deployment/hosting-on-github/">https://gohugo.io/hosting-and-deployment/hosting-on-github/</a> 。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-makefile" data-lang="makefile"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-makefile" data-lang="makefile"><span class="nf">.PHONY</span><span class="o">:</span> <span class="n">help</span> <span class="n">new</span> <span class="n">serve</span> <span class="n">deploy</span>
+
+<span class="nf">help</span><span class="o">:</span>
+	@echo make new
+	@echo make serve
+	@echo make deploy
+
+<span class="nf">new</span><span class="o">:</span>
+	<span class="c1"># Even theme use post/ instead of posts/</span>
+	<span class="nb">read</span> -p <span class="s1">&#39;Name:&#39;</span> name <span class="o">&amp;&amp;</span> hugo new post/<span class="nv">$$</span><span class="o">{</span>name<span class="o">}</span>.md
+
+<span class="nf">serve</span><span class="o">:</span>
+	hugo server -D
+
+<span class="nf">deploy</span><span class="o">:</span>
+	hugo
+	<span class="nb">cd</span> public <span class="o">&amp;&amp;</span> git add . <span class="o">&amp;&amp;</span> git commit -m <span class="s1">&#39;rebuild&#39;</span> <span class="o">&amp;&amp;</span> git push
+</code></pre></td></tr></table>
+</div>
+</div>
     </div>
 
     <div class="post-copyright">
