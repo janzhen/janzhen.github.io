@@ -6,10 +6,19 @@
     <description>Recent content in Posts on Jan&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 20 Apr 2019 19:10:58 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 21 Apr 2019 11:13:07 +0800</lastBuildDate>
     
 	<atom:link href="https://janzhen.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>鼠须管输入法的五笔输入配置</title>
+      <link>https://janzhen.github.io/post/squirrel/</link>
+      <pubDate>Sun, 21 Apr 2019 11:13:07 +0800</pubDate>
+      
+      <guid>https://janzhen.github.io/post/squirrel/</guid>
+      <description>我用过的 MacOS 下的各种五笔输入法有： 系统自带五笔 QQ五笔 搜狗五笔 鼠须管（开源） 清歌五笔（免费，已捐款） 落格输入法（付费） 这几年用了一圈下来，我还</description>
+    </item>
     
     <item>
       <title>迁移到 Hugo</title>
