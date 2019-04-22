@@ -51,7 +51,7 @@
 
 <meta itemprop="datePublished" content="2019-04-21T11:13:07&#43;08:00" />
 <meta itemprop="dateModified" content="2019-04-21T11:13:07&#43;08:00" />
-<meta itemprop="wordCount" content="1504">
+<meta itemprop="wordCount" content="2184">
 
 
 
@@ -139,6 +139,7 @@
 <ul>
 <li><a href="#安装">安装</a></li>
 <li><a href="#定制">定制</a></li>
+<li><a href="#理解鼠须管的配置原理">理解鼠须管的配置原理</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -272,6 +273,46 @@ bash rime-install wubi pinyin-simp</code></pre></td></tr></table>
 </span><span class="w">    </span>-<span class="w"> </span>{<span class="w"> </span>when<span class="p">:</span><span class="w"> </span>has_menu<span class="p">,</span><span class="w"> </span>accept<span class="p">:</span><span class="w"> </span>equal<span class="p">,</span><span class="w"> </span>send<span class="p">:</span><span class="w"> </span>Page_Down<span class="w"> </span>}</code></pre></td></tr></table>
 </div>
 </div>
+<p>鼠须管默认配置在中文输入时，有些标点符号会出现选单，比如输入[，会出现<code>「, 【, 〔, ［</code>供选择，我感觉很影响效率，标点符号的输入我都希望能直接出结果。配置方法也很简单，默认的标点符号配置在<code>/Library/Input Methods/Squirrel.app/Contents/SharedSupport/punctuation.yaml</code>文件里，复制一份，修改好，放到<code>~/Library/Rime/default.custom.yaml</code>的 patch 里即可。</p>
+
+<h2 id="理解鼠须管的配置原理">理解鼠须管的配置原理</h2>
+
+<p>前面我们创建和配置了几个配置文件，那么为什么是这些文件，这些文件是怎样工作的？</p>
+
+<p>首先鼠须管软件带的默认配置文件都在<code>/Library/Input Methods/Squirrel.app/Contents/SharedSupport/</code>里，这里的文件是不能改的，需要修改这里面的配置，就需要在<code>~/Library/Rime/</code>里建立相应的文件来打补丁。一般需要修改的配置文件有<code>default.yaml</code>和<code>squirrel.yaml</code>，对应的文件是<code>default.custom.yaml</code>和<code>squirrel.custom.yaml</code>。而针对输入方案的配置文件则是<code>方案名.custom.yaml</code>，比如五笔就是<code>wubi86.custom.yaml</code>了。</p>
+
+<p>接下来需要考虑的是定制文件里怎样打补丁了，用一个例子做说明，<code>~/Library/Rime/wubi86.schema.yaml</code>里有如下片段。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml">translator<span class="p">:</span><span class="w">
+</span><span class="w">  </span>dictionary<span class="p">:</span><span class="w"> </span>wubi86<span class="w">
+</span><span class="w">  </span>enable_charset_filter<span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="w">  </span>enable_sentence<span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="w">  </span>enable_encoder<span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="w">  </span>...</code></pre></td></tr></table>
+</div>
+</div>
+<p>我们想把<code>enable_sentence</code>改成<code>false</code>，那么补丁可以这样写：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml">patch<span class="p">:</span><span class="w">
+</span><span class="w">  </span>translator/enable_sentence<span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w"> </span><span class="c"># 关闭句子输入</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>领悟一下，详细还是看<a href="https://github.com/rime/home/wiki/CustomizationGuide">文档</a>吧。</p>
+
     </div>
 
     <div class="post-copyright">
