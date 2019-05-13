@@ -51,7 +51,7 @@
 
 <meta itemprop="datePublished" content="2019-04-21T11:13:07&#43;08:00" />
 <meta itemprop="dateModified" content="2019-04-21T11:13:07&#43;08:00" />
-<meta itemprop="wordCount" content="2259">
+<meta itemprop="wordCount" content="2283">
 
 
 
@@ -251,6 +251,7 @@ bash rime-install wubi pinyin-simp</code></pre></td></tr></table>
 </span><span class="lnt">16
 </span><span class="lnt">17
 </span><span class="lnt">18
+</span><span class="lnt">19
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="c"># ~/Library/Rime/wubi86.custom.yaml</span><span class="w">
@@ -261,6 +262,7 @@ bash rime-install wubi pinyin-simp</code></pre></td></tr></table>
 </span><span class="w">  </span>speller/max_code_length<span class="p">:</span><span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="c"># 最长4码</span><span class="w">
 </span><span class="w">  </span>speller/auto_select<span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="c"># 顶字上屏</span><span class="w">
 </span><span class="w">  </span>speller/auto_select_unique_candidate<span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="c"># 无重码自动上屏</span><span class="w">
+</span><span class="w">  </span>speller/auto_clear<span class="p">:</span><span class="w"> </span>max_length<span class="w"> </span><span class="c"># 空码且達到最長碼時確認清屏 https://github.com/rime/librime/issues/60#issuecomment-153245010</span><span class="w">
 </span><span class="w">  </span>key_binder/bindings<span class="p">:</span><span class="w">
 </span><span class="w">    </span><span class="c"># 分号、单引号上屏幕二三候选词</span><span class="w">
 </span><span class="w">    </span>-<span class="w"> </span>{when<span class="p">:</span><span class="w"> </span>has_menu<span class="p">,</span><span class="w"> </span>accept<span class="p">:</span><span class="w"> </span>semicolon<span class="p">,</span><span class="w"> </span>send<span class="p">:</span><span class="w"> </span><span class="m">2</span>}<span class="w">
