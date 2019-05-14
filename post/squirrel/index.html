@@ -51,7 +51,7 @@
 
 <meta itemprop="datePublished" content="2019-04-21T11:13:07&#43;08:00" />
 <meta itemprop="dateModified" content="2019-04-21T11:13:07&#43;08:00" />
-<meta itemprop="wordCount" content="2283">
+<meta itemprop="wordCount" content="2191">
 
 
 
@@ -249,9 +249,6 @@ bash rime-install wubi pinyin-simp</code></pre></td></tr></table>
 </span><span class="lnt">14
 </span><span class="lnt">15
 </span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="c"># ~/Library/Rime/wubi86.custom.yaml</span><span class="w">
@@ -269,10 +266,7 @@ bash rime-install wubi pinyin-simp</code></pre></td></tr></table>
 </span><span class="w">    </span>-<span class="w"> </span>{when<span class="p">:</span><span class="w"> </span>has_menu<span class="p">,</span><span class="w"> </span>accept<span class="p">:</span><span class="w"> </span>apostrophe<span class="p">,</span><span class="w"> </span>send<span class="p">:</span><span class="w"> </span><span class="m">3</span>}<span class="w">
 </span><span class="w">    </span><span class="c"># 空碼時按空格鍵清空輸入碼</span><span class="w">
 </span><span class="w">    </span>-<span class="w"> </span>{when<span class="p">:</span><span class="w"> </span>has_menu<span class="p">,</span><span class="w"> </span>accept<span class="p">:</span><span class="w"> </span>space<span class="p">,</span><span class="w"> </span>send<span class="p">:</span><span class="w"> </span>space}<span class="w">
-</span><span class="w">    </span>-<span class="w"> </span>{when<span class="p">:</span><span class="w"> </span>composing<span class="p">,</span><span class="w"> </span>accept<span class="p">:</span><span class="w"> </span>space<span class="p">,</span><span class="w"> </span>send<span class="p">:</span><span class="w"> </span>Escape}<span class="w">
-</span><span class="w">    </span><span class="c"># -=翻页</span><span class="w">
-</span><span class="w">    </span>-<span class="w"> </span>{<span class="w"> </span>when<span class="p">:</span><span class="w"> </span>paging<span class="p">,</span><span class="w"> </span>accept<span class="p">:</span><span class="w"> </span>minus<span class="p">,</span><span class="w"> </span>send<span class="p">:</span><span class="w"> </span>Page_Up<span class="w"> </span>}<span class="w">
-</span><span class="w">    </span>-<span class="w"> </span>{<span class="w"> </span>when<span class="p">:</span><span class="w"> </span>has_menu<span class="p">,</span><span class="w"> </span>accept<span class="p">:</span><span class="w"> </span>equal<span class="p">,</span><span class="w"> </span>send<span class="p">:</span><span class="w"> </span>Page_Down<span class="w"> </span>}</code></pre></td></tr></table>
+</span><span class="w">    </span>-<span class="w"> </span>{when<span class="p">:</span><span class="w"> </span>composing<span class="p">,</span><span class="w"> </span>accept<span class="p">:</span><span class="w"> </span>space<span class="p">,</span><span class="w"> </span>send<span class="p">:</span><span class="w"> </span>Escape}</code></pre></td></tr></table>
 </div>
 </div>
 <p>鼠须管默认配置在中文输入时，有些标点符号会出现选单，比如输入[，会出现<code>「, 【, 〔, ［</code>供选择，我感觉很影响效率，标点符号的输入我都希望能直接出结果。配置方法也很简单，默认的标点符号配置在<code>/Library/Input Methods/Squirrel.app/Contents/SharedSupport/punctuation.yaml</code>文件里，复制一份，修改好，放到<code>~/Library/Rime/default.custom.yaml</code>的 patch 里即可。</p>
