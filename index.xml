@@ -6,10 +6,19 @@
     <description>Recent content on Jan&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 21 Apr 2019 11:13:07 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 14 May 2019 20:45:01 +0800</lastBuildDate>
     
 	<atom:link href="https://janzhen.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>用 Pandoc &#43; Reveal.js 写幻灯片</title>
+      <link>https://janzhen.github.io/post/pandoc-revealjs/</link>
+      <pubDate>Tue, 14 May 2019 20:45:01 +0800</pubDate>
+      
+      <guid>https://janzhen.github.io/post/pandoc-revealjs/</guid>
+      <description>reveal.js 是一个 html 幻灯片框架，如果要写 html 幻灯片，这就是最好的选择了。Pandoc 是 Markup 格式之间转换的瑞士军刀。 为什么不用 PowerPoint 或者 Keynote？Pand</description>
+    </item>
     
     <item>
       <title>鼠须管输入法的五笔输入配置</title>

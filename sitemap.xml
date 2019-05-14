@@ -3,14 +3,21 @@
   
   <url>
     <loc>https://janzhen.github.io/</loc>
-    <lastmod>2019-04-21T11:13:07+08:00</lastmod>
+    <lastmod>2019-05-14T20:45:01+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://janzhen.github.io/post/</loc>
-    <lastmod>2019-04-21T11:13:07+08:00</lastmod>
+    <lastmod>2019-05-14T20:45:01+08:00</lastmod>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://janzhen.github.io/post/pandoc-revealjs/</loc>
+    <lastmod>2019-05-14T20:45:01+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
