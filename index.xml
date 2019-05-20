@@ -6,10 +6,19 @@
     <description>Recent content on Jan&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 14 May 2019 20:45:01 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 20 May 2019 20:05:04 +0800</lastBuildDate>
     
 	<atom:link href="https://janzhen.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>如虎添翼！HHKB 增加蓝牙模块</title>
+      <link>https://janzhen.github.io/post/hhkb-bluetooth/</link>
+      <pubDate>Mon, 20 May 2019 20:05:04 +0800</pubDate>
+      
+      <guid>https://janzhen.github.io/post/hhkb-bluetooth/</guid>
+      <description>HHKB(Happy Hacking Keyboard)相信程序员都会听说过，无须多说，看看 GNU 教主用 HHKB 的风采。 Richard Stallman 如果恰好你手中的 HHKB 也是教主这个型号，那么是没有蓝牙功能的。现</description>
+    </item>
     
     <item>
       <title>用 Pandoc &#43; Reveal.js 写幻灯片</title>
