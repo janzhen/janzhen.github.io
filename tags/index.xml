@@ -2,12 +2,12 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Jan&#39;s Blog</title>
-    <link>https://janzhen.github.io/tags/</link>
+    <link>https://jan365.org/tags/</link>
     <description>Recent content in Tags on Jan&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     
-	<atom:link href="https://janzhen.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://jan365.org/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
   </channel>

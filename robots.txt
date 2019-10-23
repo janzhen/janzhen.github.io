@@ -1,2 +1,2 @@
 User-agent: *
-Sitemap: https://janzhen.github.io/sitemap.xml
+Sitemap: https://jan365.org/sitemap.xml

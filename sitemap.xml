@@ -1,56 +1,56 @@
-<?xml-stylesheet type="text/xsl" href="https://janzhen.github.io/sitemap.xsl"?>
+<?xml-stylesheet type="text/xsl" href="https://jan365.org/sitemap.xsl"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://janzhen.github.io/</loc>
+    <loc>https://jan365.org/</loc>
     <lastmod>2019-05-20T20:05:04+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://janzhen.github.io/post/</loc>
+    <loc>https://jan365.org/post/</loc>
     <lastmod>2019-05-20T20:05:04+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://janzhen.github.io/post/hhkb-bluetooth/</loc>
+    <loc>https://jan365.org/post/hhkb-bluetooth/</loc>
     <lastmod>2019-05-20T20:05:04+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://janzhen.github.io/post/pandoc-revealjs/</loc>
+    <loc>https://jan365.org/post/pandoc-revealjs/</loc>
     <lastmod>2019-05-14T20:45:01+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://janzhen.github.io/post/squirrel/</loc>
+    <loc>https://jan365.org/post/squirrel/</loc>
     <lastmod>2019-04-21T11:13:07+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://janzhen.github.io/post/migration/</loc>
+    <loc>https://jan365.org/post/migration/</loc>
     <lastmod>2019-04-20T19:10:58+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://janzhen.github.io/categories/</loc>
+    <loc>https://jan365.org/categories/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://janzhen.github.io/tags/</loc>
+    <loc>https://jan365.org/tags/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>

@@ -2,48 +2,48 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Jan&#39;s Blog</title>
-    <link>https://janzhen.github.io/</link>
+    <link>https://jan365.org/</link>
     <description>Recent content on Jan&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Mon, 20 May 2019 20:05:04 +0800</lastBuildDate>
     
-	<atom:link href="https://janzhen.github.io/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://jan365.org/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>如虎添翼！HHKB 增加蓝牙模块</title>
-      <link>https://janzhen.github.io/post/hhkb-bluetooth/</link>
+      <link>https://jan365.org/post/hhkb-bluetooth/</link>
       <pubDate>Mon, 20 May 2019 20:05:04 +0800</pubDate>
       
-      <guid>https://janzhen.github.io/post/hhkb-bluetooth/</guid>
+      <guid>https://jan365.org/post/hhkb-bluetooth/</guid>
       <description>HHKB(Happy Hacking Keyboard)相信程序员都会听说过，无须多说，看看 GNU 教主用 HHKB 的风采。 如果恰好你手中的 HHKB 也是教主这个型号，那么是没有蓝牙功能的。现有的</description>
     </item>
     
     <item>
       <title>用 Pandoc &#43; Reveal.js 写幻灯片</title>
-      <link>https://janzhen.github.io/post/pandoc-revealjs/</link>
+      <link>https://jan365.org/post/pandoc-revealjs/</link>
       <pubDate>Tue, 14 May 2019 20:45:01 +0800</pubDate>
       
-      <guid>https://janzhen.github.io/post/pandoc-revealjs/</guid>
+      <guid>https://jan365.org/post/pandoc-revealjs/</guid>
       <description>reveal.js 是一个 html 幻灯片框架，如果要写 html 幻灯片，这就是最好的选择了。Pandoc 是 Markup 格式之间转换的瑞士军刀。 为什么不用 PowerPoint 或者 Keynote？Pand</description>
     </item>
     
     <item>
       <title>鼠须管输入法的五笔输入配置</title>
-      <link>https://janzhen.github.io/post/squirrel/</link>
+      <link>https://jan365.org/post/squirrel/</link>
       <pubDate>Sun, 21 Apr 2019 11:13:07 +0800</pubDate>
       
-      <guid>https://janzhen.github.io/post/squirrel/</guid>
+      <guid>https://jan365.org/post/squirrel/</guid>
       <description>我用过的 MacOS 下的各种五笔输入法有： 系统自带五笔 QQ五笔 搜狗五笔 鼠须管（开源） 清歌五笔（免费，已捐款） 落格输入法（付费） 这几年用了一圈下来，我还</description>
     </item>
     
     <item>
       <title>迁移到 Hugo</title>
-      <link>https://janzhen.github.io/post/migration/</link>
+      <link>https://jan365.org/post/migration/</link>
       <pubDate>Sat, 20 Apr 2019 19:10:58 +0800</pubDate>
       
-      <guid>https://janzhen.github.io/post/migration/</guid>
+      <guid>https://jan365.org/post/migration/</guid>
       <description>从 Jekyll 到 hexo，现在又迁移到 Hugo 了。在我看来，Hugo 的优势是不需要安装一大堆依赖，安装完 Hugo 本身之后马上就可以用了。 写了个简单的 Makefil</description>
     </item>
     
