@@ -4,13 +4,15 @@
   <url>
     <loc>https://janzhen.github.io/</loc>
     <lastmod>2019-05-20T20:05:04+08:00</lastmod>
-    <priority>0</priority>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://janzhen.github.io/post/</loc>
     <lastmod>2019-05-20T20:05:04+08:00</lastmod>
-    <priority>0</priority>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
@@ -43,12 +45,14 @@
   
   <url>
     <loc>https://janzhen.github.io/categories/</loc>
-    <priority>0</priority>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://janzhen.github.io/tags/</loc>
-    <priority>0</priority>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
 </urlset>
