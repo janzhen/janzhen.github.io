@@ -2,15 +2,22 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://jan365.org/post/process-in-docker-does-not-handle-term/</loc>
+    <lastmod>2019-12-02T20:11:39+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://jan365.org/</loc>
-    <lastmod>2019-05-20T20:05:04+08:00</lastmod>
+    <lastmod>2019-12-02T20:11:39+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://jan365.org/post/</loc>
-    <lastmod>2019-05-20T20:05:04+08:00</lastmod>
+    <lastmod>2019-12-02T20:11:39+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>

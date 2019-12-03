@@ -6,10 +6,19 @@
     <description>Recent content in Posts on Jan&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 20 May 2019 20:05:04 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 02 Dec 2019 20:11:39 +0800</lastBuildDate>
     
 	<atom:link href="https://jan365.org/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Docker 里的进程为什么没有处理 TERM 信号</title>
+      <link>https://jan365.org/post/process-in-docker-does-not-handle-term/</link>
+      <pubDate>Mon, 02 Dec 2019 20:11:39 +0800</pubDate>
+      
+      <guid>https://jan365.org/post/process-in-docker-does-not-handle-term/</guid>
+      <description>现象 在一个部署在 Kubernetes 的项目里，每次重新部署的都会发现有两个 pods 处于 terminating 状态的时间特别长，于是着手分析这个问题。 Kubernetes 是如何关闭一个容器的？文档 Pods - Kubernetes 介</description>
+    </item>
     
     <item>
       <title>如虎添翼！HHKB 增加蓝牙模块</title>
