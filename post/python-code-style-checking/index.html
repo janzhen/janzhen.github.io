@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Python 代码风格检查最佳实践 - Jan&#39;s Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Jan Zhen" /><meta name="description" content="本文介绍 Python 代码风格检查的实践，其中第3节渐进式介绍了4种方案，也可以直接看第4节“最佳实践”。 1. 项目需要统一的代码风格 代码风格类似文章的排版" /><meta name="keywords" content="coding" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.63.2 with theme even" />
+
+
+<link rel="canonical" href="https://jan365.org/post/python-code-style-checking/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Python 代码风格检查最佳实践" />
+<meta property="og:description" content="本文介绍 Python 代码风格检查的实践，其中第3节渐进式介绍了4种方案，也可以直接看第4节“最佳实践”。 1. 项目需要统一的代码风格 代码风格类似文章的排版" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jan365.org/post/python-code-style-checking/" />
+<meta property="article:published_time" content="2020-02-04T18:20:52+08:00" />
+<meta property="article:modified_time" content="2020-02-04T18:20:52+08:00" />
+<meta itemprop="name" content="Python 代码风格检查最佳实践">
+<meta itemprop="description" content="本文介绍 Python 代码风格检查的实践，其中第3节渐进式介绍了4种方案，也可以直接看第4节“最佳实践”。 1. 项目需要统一的代码风格 代码风格类似文章的排版">
+<meta itemprop="datePublished" content="2020-02-04T18:20:52&#43;08:00" />
+<meta itemprop="dateModified" content="2020-02-04T18:20:52&#43;08:00" />
+<meta itemprop="wordCount" content="2231">
+
+
+
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Python 代码风格检查最佳实践"/>
+<meta name="twitter:description" content="本文介绍 Python 代码风格检查的实践，其中第3节渐进式介绍了4种方案，也可以直接看第4节“最佳实践”。 1. 项目需要统一的代码风格 代码风格类似文章的排版"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Jan&#39;s Blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Jan&#39;s Blog</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Python 代码风格检查最佳实践</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-02-04 </span>
+        
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-项目需要统一的代码风格">1. 项目需要统一的代码风格</a></li>
+    <li><a href="#2-python-项目的代码风格">2. Python 项目的代码风格</a></li>
+    <li><a href="#3-代码风格检查">3. 代码风格检查</a>
+      <ul>
+        <li><a href="#31-人工检查">3.1. 人工检查</a></li>
+        <li><a href="#32-手动运行检查器">3.2. 手动运行检查器</a></li>
+        <li><a href="#33-自动运行检查器">3.3. 自动运行检查器</a></li>
+        <li><a href="#34-自动修正代码风格">3.4. 自动修正代码风格</a></li>
+      </ul>
+    </li>
+    <li><a href="#4-最佳实践">4. 最佳实践</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>本文介绍 Python 代码风格检查的实践，其中第3节渐进式介绍了4种方案，也可以直接看第4节“最佳实践”。</p>
+<h2 id="1-项目需要统一的代码风格">1. 项目需要统一的代码风格</h2>
+<p>代码风格类似文章的排版要求，一本杂志、书籍往往由多人合著，作者们需要达成共识用统一的排版风格。程序同样由多个程序员合作编写而成，甚至还会互相修改其他成员的代码，统一的风格犹为重要。</p>
+<h2 id="2-python-项目的代码风格">2. Python 项目的代码风格</h2>
+<p>Python 项目的代码风格，我认为需要分成两层：</p>
+<ol>
+<li><a href="https://www.python.org/dev/peps/pep-0008/">PEP 8</a>，这是 Python 社区的共识，应该作为我们项目代码风格的底线。然而，PEP 8 的规定相当宽泛，符合 PEP 8的前提下，仍然可以写出风格迥异代码。因此，项目通常又会在 PEP 8的基础上制定</li>
+<li>项目风格要求。在PEP 8基础上制定项目风格，实际上是基于一些的原因增加限制。比如规定字典元素太多时该如何换行。风格一，尽量在一行写入最多的元素，原因是这样能使代码更紧凑。</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">{&#39;key1&#39;: &#39;value1&#39;, &#39;key2&#39;: &#39;value2&#39;, &#39;key3&#39;: &#39;value3&#39;, &#39;key4&#39;: &#39;value4&#39;,
+ &#39;key5&#39;: &#39;value5&#39;, &#39;key6&#39;: &#39;value6&#39;}
+</code></pre></td></tr></table>
+</div>
+</div><p>风格二，一行一个元素，原因是将来增删改元素只会影响到一行，方便 diff review。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">{
+    &#39;key1&#39;: &#39;value1&#39;,
+    &#39;key2&#39;: &#39;value2&#39;,
+    &#39;key3&#39;: &#39;value3&#39;,
+    &#39;key4&#39;: &#39;value4&#39;,
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>都有道理，需要项目成员达成共识，制定出项目的风格要求。</p>
+<h2 id="3-代码风格检查">3. 代码风格检查</h2>
+<p>代码风格制定好了，<strong>如果没有相应检查机制，我相信制定好的代码风格并不会得到完整的执行。</strong> 如何检查 Python 代码风格是本文重点。我把代码风格检查机制按照自动化程度分成以下层次：</p>
+<ol>
+<li>人工检查；</li>
+<li>手动运行检查器；</li>
+<li>自动运行检查器；</li>
+<li>自动修正代码风格；</li>
+</ol>
+<h3 id="31-人工检查">3.1. 人工检查</h3>
+<p>人工检查是最原始的，在 code review 的时候，看看是不是有代码风格问题。熟悉 PEP 8的 Python 程序员应该具备肉眼检查 PEP 8风格的能力，通常风格问题是很碍眼的，想看不出来都难。
+然而人工检查存在着明显的问题：</p>
+<ol>
+<li>code review 还要把精力放在代码风格上；</li>
+<li>code review 阶段还要提一批风格相关的 issues；</li>
+<li>code review 阶段还得来回修改代码风格问题；</li>
+<li>人毕竟不是机器，可能有遗漏。</li>
+</ol>
+<p><strong>缺点：</strong> 显然，人工检查存在效率和严谨性的问题，更何况有些项目并没有对每一个 commit 做 code review，人工检查得等到什么时候触碰到这些代码时才能进行。</p>
+<h3 id="32-手动运行检查器">3.2. 手动运行检查器</h3>
+<p>代码风格检查工作如此的机械化，显然适合让机器做，而不必浪费程序员的精力。</p>
+<p>常用的检查器有：<a href="https://pypi.org/project/pep8/">pep8 · PyPI</a>、<a href="https://flake8.pycqa.org/en/latest/">flake8</a>、<a href="https://flake8.pycqa.org/en/latest/">pylint</a>。推荐 flake8，其结合 pep8 和其他一些风格检查，基本上忠实于 pep8，不会带来太多打扰。不推荐 pylint 是因为 pylint 的默认配置非常糟糕（不是 PEP 8，也不是哪个社区的共识），非开箱即用，得根据项目代码风格精心配置，否则相当打扰。不过 flake8 的可定制性较差，额外的项目风格无法检测，pylint 相对来说可定制性更高。</p>
+<p>有了检查器，程序员可以在提交代码前运行检查，根检查器报告修改，直到完全通过。进阶一点可以用相应的编辑器插件，边写边检查。</p>
+<p><strong>缺点：</strong> 手动运行的问题是，程序员可能忘记运行了，或者新加入项目的程序员根本不知道有这个规则。</p>
+<p>那么我们自然会想到自动运行检查器。</p>
+<h3 id="33-自动运行检查器">3.3. 自动运行检查器</h3>
+<p>自动运行检查器有这些方案：</p>
+<ol>
+<li><a href="https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks">Git Hooks</a>，git hooks 又分为
+<ol>
+<li>客户端 hooks，</li>
+<li>服务端 hooks；</li>
+</ol>
+</li>
+<li><a href="https://en.wikipedia.org/wiki/Continuous_integration">CI</a> 持续集成。</li>
+</ol>
+<p><strong>这些方案中我推荐客户端 Git Hooks。</strong> 相对服务端 hooks，客户端 hooks 不需要服务端支持，适应性高；相对于 CI，搭建成本低，且在代码提交前就检查好风格，而不是到了集成阶段再来检查。</p>
+<p>客户端 hooks 的原理非常简单，.git/hooks 目录下有很多 .sample 文件，是各个阶段 hook 的例子。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">$ ls .git/hooks/
+applypatch-msg.sample	   pre-applypatch.sample  pre-receive.sample
+commit-msg.sample	   pre-commit.sample	  prepare-commit-msg.sample
+fsmonitor-watchman.sample  pre-push.sample	  update.sample
+post-update.sample	   pre-rebase.sample
+</code></pre></td></tr></table>
+</div>
+</div><p>这里我们需要 pre-commit hook，创建一个 pre-commit 文件，内容是 shell 脚本，运行检查器。如果检查不通过就会阻止 commit。通过这样的机制就能确保检查器运行且检查通过。</p>
+<p>然而，客户端的 hooks 是在本地的，不在仓库里管理，也就是说 hooks 不能共享不能同步。为了解决这个问题，又有了 <a href="https://pre-commit.com/">pre-commit</a> 这个工具，只需要在仓库根目录放置一个 .pre-commit-config.yaml ，定义需要的 hooks（github 上很多开源的 hook 可以在这里直接引用，当然也包括 flake8），把这个文件提交到仓库。然后在客户端运行一次 <code>pre-commit install --install-hooks</code> 即可注册到 .git/hooks/pre-commit 里，后继 .pre-commit-config.yaml 更新也同步到各个客户端。用法详见第4节。</p>
+<p>到目前为止，已经做到确保代码在提交到仓库之前是通过代码风格检查的。</p>
+<p><strong>缺点：</strong> 要说还有什么不足，那就是检查虽然是自动，但修正还得手动。那么有没有自动修正的方案？</p>
+<h3 id="34-自动修正代码风格">3.4. 自动修正代码风格</h3>
+<p>Python 代码风格自动修正，目前最好的应该是 <a href="https://black.readthedocs.io/en/stable/">Black</a>。Black 是 PSF（Python Software Foundation，Python 软件基金会）的项目。为什么要强调是 PSF 的项目？<strong>因为符合 PEP 8的写法可以有很多种，而修正工具只能修正成其中一种。</strong> 那么哪一种写法才大家都喜欢的？这就需要项目成员达成共识，也就是第2节提到的项目的风格要求。<strong>而 Black 作为 PSF 的项目，一定程度上代表了 Python 社区的共识。</strong> 那么，我们没必要再花精力制定项目代码风格，直接交给 Black 就好了。</p>
+<p>Black 在<a href="https://black.readthedocs.io/en/stable/the_black_code_style.html">文档</a>详细介绍了其代码风格及相应的原因，比如为什么默认一行的长度限制是88字符（可以配置），比 PEP 8标准增加10%，有兴趣可以看一下。</p>
+<p>同样，把 Black 也加到 pre-commit hook 里，那么在提交代码的时候就会自动修正代码风格。再加一道风格检查，把不能自动修正的提示出来，让提交者手动修正。</p>
+<p>这样就形成了本文的最佳实践，具体做法见下一节。</p>
+<h2 id="4-最佳实践">4. 最佳实践</h2>
+<p>在仓库根目录放置以下3个文件，并提交。执行一次  <code>make init</code> 即完成所有配置工作。</p>
+<p>实现的功能有：在 commit 的时候，</p>
+<ol>
+<li>自动重排 import 顺序，</li>
+<li>修正代码风格，</li>
+<li>检查代码风格，</li>
+<li>修正其他文件格式问题。</li>
+</ol>
+<p>.flake8</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="k">[flake8]</span>
+<span class="na">max-line-length</span> <span class="o">=</span> <span class="s">80</span>
+<span class="na">select</span> <span class="o">=</span> <span class="s">C,E,F,W,B,B950</span>
+<span class="na">ignore</span> <span class="o">=</span> <span class="s">E203,E501,W503</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>.pre-commit-config.yaml：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="k">repos</span><span class="p">:</span><span class="w">
+</span><span class="w"></span><span class="w">  </span>- <span class="k">repo</span><span class="p">:</span><span class="w"> </span>https<span class="p">:</span>//github.com/asottile/reorder_python_imports<span class="w">
+</span><span class="w">    </span><span class="k">rev</span><span class="p">:</span><span class="w"> </span>v1<span class="m">.8</span><span class="m">.0</span><span class="w">
+</span><span class="w">    </span><span class="k">hooks</span><span class="p">:</span><span class="w">
+</span><span class="w"></span><span class="w">      </span>- <span class="k">id</span><span class="p">:</span><span class="w"> </span>reorder-python-imports<span class="w">
+</span><span class="w">        </span><span class="k">name</span><span class="p">:</span><span class="w"> </span>Reorder<span class="w"> </span>Python<span class="w"> </span>imports<span class="w"> </span>(src<span class="p">,</span><span class="w"> </span>tests)<span class="w">
+</span><span class="w">  </span>- <span class="k">repo</span><span class="p">:</span><span class="w"> </span>https<span class="p">:</span>//github.com/python/black<span class="w">
+</span><span class="w">    </span><span class="k">rev</span><span class="p">:</span><span class="w"> </span>stable<span class="w">
+</span><span class="w">    </span><span class="k">hooks</span><span class="p">:</span><span class="w">
+</span><span class="w"></span><span class="w">      </span>- <span class="k">id</span><span class="p">:</span><span class="w"> </span>black<span class="w">
+</span><span class="w">  </span>- <span class="k">repo</span><span class="p">:</span><span class="w"> </span>https<span class="p">:</span>//gitlab.com/pycqa/flake8<span class="w">
+</span><span class="w">    </span><span class="k">rev</span><span class="p">:</span><span class="w"> </span><span class="m">3.7</span><span class="m">.9</span><span class="w">
+</span><span class="w">    </span><span class="k">hooks</span><span class="p">:</span><span class="w">
+</span><span class="w"></span><span class="w">      </span>- <span class="k">id</span><span class="p">:</span><span class="w"> </span>flake8<span class="w">
+</span><span class="w">        </span><span class="k">additional_dependencies</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>flake8-bugbear<span class="p">]</span><span class="w">
+</span><span class="w">  </span>- <span class="k">repo</span><span class="p">:</span><span class="w"> </span>https<span class="p">:</span>//github.com/pre-commit/pre-commit-hooks<span class="w">
+</span><span class="w">    </span><span class="k">rev</span><span class="p">:</span><span class="w"> </span>v2<span class="m">.4</span><span class="m">.0</span><span class="w">
+</span><span class="w">    </span><span class="k">hooks</span><span class="p">:</span><span class="w">
+</span><span class="w"></span><span class="w">      </span>- <span class="k">id</span><span class="p">:</span><span class="w"> </span>check-byte-order-marker<span class="w">
+</span><span class="w">      </span>- <span class="k">id</span><span class="p">:</span><span class="w"> </span>trailing-whitespace<span class="w">
+</span><span class="w">      </span>- <span class="k">id</span><span class="p">:</span><span class="w"> </span>end-of-file-fixer<span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>Makefile:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-makefile" data-lang="makefile"><span class="nf">init</span><span class="o">:</span>
+	python3 -m venv .venv
+	.venv/bin/pip install pre-commit
+	.venv/bin/pre-commit install --install-hooks
+
+<span class="nf">clean</span><span class="o">:</span>
+	rm -rf .venv
+
+<span class="nf">.PHONY</span><span class="o">:</span> <span class="n">init</span> <span class="n">clean</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>该方案受 <a href="https://github.com/pallets/flask/blob/master/CONTRIBUTING.rst">Flask 的 contributing guidelines</a> 启发。</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">Jan Zhen</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2020-02-04
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/process-in-docker-does-not-handle-term/">
+            <span class="next-text nav-default">Docker 里的进程为什么没有处理 TERM 信号</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'blog-ywllbb4f2v';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/janzhen" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.instagram.com/jan_zhen/" class="iconfont icon-instagram" title="instagram"></a>
+  <a href="https://jan365.org/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2019 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Jan Zhen</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-47790058-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+</body>
+</html>

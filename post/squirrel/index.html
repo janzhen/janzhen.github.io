@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.58.3 with theme even" />
+<meta name="generator" content="Hugo 0.63.2 with theme even" />
 
 
 <link rel="canonical" href="https://jan365.org/post/squirrel/" />
@@ -46,16 +46,13 @@
 <meta property="article:modified_time" content="2019-04-21T11:13:07+08:00" />
 <meta itemprop="name" content="鼠须管输入法的五笔输入配置">
 <meta itemprop="description" content="我用过的 MacOS 下的各种五笔输入法有： 系统自带五笔 QQ五笔 搜狗五笔 鼠须管（开源） 清歌五笔（免费，已捐款） 落格输入法（付费） 这几年用了一圈下来，我还">
-
-
 <meta itemprop="datePublished" content="2019-04-21T11:13:07&#43;08:00" />
 <meta itemprop="dateModified" content="2019-04-21T11:13:07&#43;08:00" />
-<meta itemprop="wordCount" content="2191">
+<meta itemprop="wordCount" content="2050">
 
 
 
-<meta itemprop="keywords" content="" />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="鼠须管输入法的五笔输入配置"/>
 <meta name="twitter:description" content="我用过的 MacOS 下的各种五笔输入法有： 系统自带五笔 QQ五笔 搜狗五笔 鼠须管（开源） 清歌五笔（免费，已捐款） 落格输入法（付费） 这几年用了一圈下来，我还"/>
 
@@ -133,22 +130,16 @@
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#安装">安装</a></li>
-<li><a href="#定制">定制</a></li>
-<li><a href="#理解鼠须管的配置原理">理解鼠须管的配置原理</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#安装">安装</a></li>
+    <li><a href="#定制">定制</a></li>
+    <li><a href="#理解鼠须管的配置原理">理解鼠须管的配置原理</a></li>
+  </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
-      
-
-<p>我用过的 MacOS 下的各种五笔输入法有：</p>
-
+      <p>我用过的 MacOS 下的各种五笔输入法有：</p>
 <ul>
 <li>系统自带五笔</li>
 <li>QQ五笔</li>
@@ -157,82 +148,69 @@
 <li>清歌五笔（免费，已捐款）</li>
 <li>落格输入法（付费）</li>
 </ul>
-
 <p>这几年用了一圈下来，我还是回到了鼠须管输入法。为什么呢？我先说说其他输入法让我不满意的地方。系统自带五笔我最不能接受的是不支持 emacs 风格光标移动——ctrl+b：后退，ctrl+f：前进，还有ctrl+p、n、e、a等等，然而，在英文、拼音输入状态下都支持。QQ五笔、搜狗五笔定制性太差，不顺手的设定也调节不了。清歌五笔的定制性也不高，但是默认就比较顺手，缺点是词库不能替换，虽然原版的就已经很不错。落格输入法支持多种输入法，五笔只是其中之一，可以替换词库，但是定制性的功能不够强大，比如想用拼音反查五笔编码就做不到。</p>
-
 <p>一圈下来我也了解了自己的需求：</p>
-
 <ul>
 <li>可以自定义词库</li>
 <li>不影响 emacs 风格光标移动</li>
 <li>临时拼音输入，且带五笔编码反查</li>
 <li>自定义输入习惯，如四码唯一上屏，五码顶字上屏，分号、单引号选二三候选字，空码按空格清空等等</li>
 </ul>
-
 <p>想要最灵活的定制，最强大的功能，选择必然是鼠须管了。然而鼠须管的缺点也相当明显，配置难度非常高，尤其是在一两年前，还得自己编译出最新版。幸好最近作者又再发力，易用性有了一定的提高。不过就目前的情况看来，要用鼠须管，最好你是一名程序员，或者至少是名专业用户。</p>
-
 <h2 id="安装">安装</h2>
-
 <p>用 brew 安装非常简单。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">brew install squirrel</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-shell" data-lang="shell">brew install squirrel
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>鼠须管默认没有五笔，官方提供了一个工具——东风破，用于安装输入方案：</p>
+</div><p>鼠须管默认没有五笔，官方提供了一个工具——东风破，用于安装输入方案：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-shell" data-lang="shell">git clone https://github.com/rime/plum.git
 <span class="nb">cd</span> plum
-bash rime-install wubi pinyin-simp</code></pre></td></tr></table>
+bash rime-install wubi pinyin-simp
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>五笔依赖 pinyin-simp 做拼音反查，所以这里一并安装了。</p>
-
+</div><p>五笔依赖 pinyin-simp 做拼音反查，所以这里一并安装了。</p>
 <p>接下来我们还需要把五笔配置到输入法选单里，新建或修改以下文件。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="c"># ~/Library/Rime/default.custom.yaml</span><span class="w">
-</span><span class="w"></span>patch<span class="p">:</span><span class="w">
-</span><span class="w">  </span>schema_list<span class="p">:</span><span class="w">
-</span><span class="w">    </span>-<span class="w"> </span>schema<span class="p">:</span><span class="w"> </span>wubi86</code></pre></td></tr></table>
+</span><span class="w"></span><span class="k">patch</span><span class="p">:</span><span class="w">
+</span><span class="w"></span><span class="w">  </span><span class="k">schema_list</span><span class="p">:</span><span class="w">
+</span><span class="w"></span><span class="w">    </span>- <span class="k">schema</span><span class="p">:</span><span class="w"> </span>wubi86<span class="w">
+</span></code></pre></td></tr></table>
 </div>
-</div>
-<p>在输入菜单里点部署，到现在鼠须管被配置成五笔输入法了。</p>
-
+</div><p>在输入菜单里点部署，到现在鼠须管被配置成五笔输入法了。</p>
 <p>然而，当你打了一段时间之后，你会发现这个五笔有点问题。这个 <a href="https://github.com/rime/rime-wubi/pull/3">pr</a> 里描述得很清楚，摘录一小段：</p>
-
 <blockquote>
 <ul>
 <li>utem 第一位是 <code>顔</code>，第二位才是 <code>颜</code></li>
 <li>tvfh 第一位是 <code>筆</code>，第二位才是 <code>律</code></li>
 </ul>
 </blockquote>
-
 <p>可惜作者没有接纳这个 pr。但是鼠须管本来就具有超高的定制性，别说改五笔码表了，创造自己的输入法都行。那么我们现在要做的是修改五笔的码表（可以称为词库），方法很简单，看看<code>~/Library/Rime/wubi86.dict.yaml</code>的内容，格式很简单，换成自己喜欢的词库就行。</p>
-
 <p>如果你没有特别喜欢的词库或者不想制作词库，那么也可以用上面 pr 提供的库词，会是个不错的选择。</p>
-
 <h2 id="定制">定制</h2>
-
 <p><code>~/Library/Rime/wubi86.custom.yaml</code>文件可以针对五笔输入方案定制，分享我的定制：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -251,35 +229,31 @@ bash rime-install wubi pinyin-simp</code></pre></td></tr></table>
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="c"># ~/Library/Rime/wubi86.custom.yaml</span><span class="w">
-</span><span class="w"></span>patch<span class="p">:</span><span class="w">
-</span><span class="w">  </span>translator/enable_user_dict<span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w"> </span><span class="c"># 关闭词频调整</span><span class="w">
-</span><span class="w">  </span>translator/enable_sentence<span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w"> </span><span class="c"># 关闭句子输入</span><span class="w">
-</span><span class="w">  </span>translator/enable_completion<span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">  </span><span class="c"># 关闭逐键提示</span><span class="w">
-</span><span class="w">  </span>speller/max_code_length<span class="p">:</span><span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="c"># 最长4码</span><span class="w">
-</span><span class="w">  </span>speller/auto_select<span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="c"># 顶字上屏</span><span class="w">
-</span><span class="w">  </span>speller/auto_select_unique_candidate<span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="c"># 无重码自动上屏</span><span class="w">
-</span><span class="w">  </span>speller/auto_clear<span class="p">:</span><span class="w"> </span>max_length<span class="w"> </span><span class="c"># 空码且達到最長碼時確認清屏 https://github.com/rime/librime/issues/60#issuecomment-153245010</span><span class="w">
-</span><span class="w">  </span>key_binder/bindings<span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="c"># 分号、单引号上屏幕二三候选词</span><span class="w">
-</span><span class="w">    </span>-<span class="w"> </span>{when<span class="p">:</span><span class="w"> </span>has_menu<span class="p">,</span><span class="w"> </span>accept<span class="p">:</span><span class="w"> </span>semicolon<span class="p">,</span><span class="w"> </span>send<span class="p">:</span><span class="w"> </span><span class="m">2</span>}<span class="w">
-</span><span class="w">    </span>-<span class="w"> </span>{when<span class="p">:</span><span class="w"> </span>has_menu<span class="p">,</span><span class="w"> </span>accept<span class="p">:</span><span class="w"> </span>apostrophe<span class="p">,</span><span class="w"> </span>send<span class="p">:</span><span class="w"> </span><span class="m">3</span>}<span class="w">
+</span><span class="w"></span><span class="k">patch</span><span class="p">:</span><span class="w">
+</span><span class="w"></span><span class="w">  </span><span class="k">translator/enable_user_dict</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w"> </span><span class="c"># 关闭词频调整</span><span class="w">
+</span><span class="w">  </span><span class="k">translator/enable_sentence</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w"> </span><span class="c"># 关闭句子输入</span><span class="w">
+</span><span class="w">  </span><span class="k">translator/enable_completion</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">  </span><span class="c"># 关闭逐键提示</span><span class="w">
+</span><span class="w">  </span><span class="k">speller/max_code_length</span><span class="p">:</span><span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="c"># 最长4码</span><span class="w">
+</span><span class="w">  </span><span class="k">speller/auto_select</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="c"># 顶字上屏</span><span class="w">
+</span><span class="w">  </span><span class="k">speller/auto_select_unique_candidate</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="c"># 无重码自动上屏</span><span class="w">
+</span><span class="w">  </span><span class="k">speller/auto_clear</span><span class="p">:</span><span class="w"> </span>max_length<span class="w"> </span><span class="c"># 空码且達到最長碼時確認清屏 https://github.com/rime/librime/issues/60#issuecomment-153245010</span><span class="w">
+</span><span class="w">  </span><span class="k">key_binder/bindings</span><span class="p">:</span><span class="w">
+</span><span class="w"></span><span class="w">    </span><span class="c"># 分号、单引号上屏幕二三候选词</span><span class="w">
+</span><span class="w">    </span>- {<span class="k">when: has_menu, accept: semicolon, send</span><span class="p">:</span><span class="w"> </span><span class="m">2</span>}<span class="w">
+</span><span class="w">    </span>- {<span class="k">when: has_menu, accept: apostrophe, send</span><span class="p">:</span><span class="w"> </span><span class="m">3</span>}<span class="w">
 </span><span class="w">    </span><span class="c"># 空碼時按空格鍵清空輸入碼</span><span class="w">
-</span><span class="w">    </span>-<span class="w"> </span>{when<span class="p">:</span><span class="w"> </span>has_menu<span class="p">,</span><span class="w"> </span>accept<span class="p">:</span><span class="w"> </span>space<span class="p">,</span><span class="w"> </span>send<span class="p">:</span><span class="w"> </span>space}<span class="w">
-</span><span class="w">    </span>-<span class="w"> </span>{when<span class="p">:</span><span class="w"> </span>composing<span class="p">,</span><span class="w"> </span>accept<span class="p">:</span><span class="w"> </span>space<span class="p">,</span><span class="w"> </span>send<span class="p">:</span><span class="w"> </span>Escape}</code></pre></td></tr></table>
+</span><span class="w">    </span>- {<span class="k">when: has_menu, accept: space, send</span><span class="p">:</span><span class="w"> </span>space}<span class="w">
+</span><span class="w">    </span>- {<span class="k">when: composing, accept: space, send</span><span class="p">:</span><span class="w"> </span>Escape}<span class="w">
+</span></code></pre></td></tr></table>
 </div>
-</div>
-<p>鼠须管默认配置在中文输入时，有些标点符号会出现选单，比如输入[，会出现<code>「, 【, 〔, ［</code>供选择，我感觉很影响效率，标点符号的输入我都希望能直接出结果。配置方法也很简单，默认的标点符号配置在<code>/Library/Input Methods/Squirrel.app/Contents/SharedSupport/punctuation.yaml</code>文件里，复制一份，修改好，放到<code>~/Library/Rime/default.custom.yaml</code>的 patch 里即可。</p>
-
+</div><p>鼠须管默认配置在中文输入时，有些标点符号会出现选单，比如输入[，会出现<code>「, 【, 〔, ［</code>供选择，我感觉很影响效率，标点符号的输入我都希望能直接出结果。配置方法也很简单，默认的标点符号配置在<code>/Library/Input Methods/Squirrel.app/Contents/SharedSupport/punctuation.yaml</code>文件里，复制一份，修改好，放到<code>~/Library/Rime/default.custom.yaml</code>的 patch 里即可。</p>
 <h2 id="理解鼠须管的配置原理">理解鼠须管的配置原理</h2>
-
 <p>前面我们创建和配置了几个配置文件，那么为什么是这些文件，这些文件是怎样工作的？</p>
-
 <p>首先鼠须管软件带的默认配置文件都在<code>/Library/Input Methods/Squirrel.app/Contents/SharedSupport/</code>里，这里的文件是不能改的，需要修改这里面的配置，就需要在<code>~/Library/Rime/</code>里建立相应的文件来打补丁。一般需要修改的配置文件有<code>default.yaml</code>和<code>squirrel.yaml</code>，对应的文件是<code>default.custom.yaml</code>和<code>squirrel.custom.yaml</code>。而针对输入方案的配置文件则是<code>方案名.custom.yaml</code>，比如五笔就是<code>wubi86.custom.yaml</code>了。</p>
-
 <p>接下来需要考虑的是定制文件里怎样打补丁了，用一个例子做说明，<code>~/Library/Rime/wubi86.schema.yaml</code>里有如下片段。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -287,29 +261,28 @@ bash rime-install wubi pinyin-simp</code></pre></td></tr></table>
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-yaml" data-lang="yaml">translator<span class="p">:</span><span class="w">
-</span><span class="w">  </span>dictionary<span class="p">:</span><span class="w"> </span>wubi86<span class="w">
-</span><span class="w">  </span>enable_charset_filter<span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-</span><span class="w">  </span>enable_sentence<span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-</span><span class="w">  </span>enable_encoder<span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-</span><span class="w">  </span>...</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="k">translator</span><span class="p">:</span><span class="w">
+</span><span class="w"></span><span class="w">  </span><span class="k">dictionary</span><span class="p">:</span><span class="w"> </span>wubi86<span class="w">
+</span><span class="w">  </span><span class="k">enable_charset_filter</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="w">  </span><span class="k">enable_sentence</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="w">  </span><span class="k">enable_encoder</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="w">  </span>...<span class="w">
+</span></code></pre></td></tr></table>
 </div>
-</div>
-<p>我们想把<code>enable_sentence</code>改成<code>false</code>，那么补丁可以这样写：</p>
+</div><p>我们想把<code>enable_sentence</code>改成<code>false</code>，那么补丁可以这样写：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="c"># ~/Library/Rime/wubi86.custom.yaml</span><span class="w">
-</span><span class="w"></span>patch<span class="p">:</span><span class="w">
-</span><span class="w">  </span>translator/enable_sentence<span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w"> </span><span class="c"># 关闭句子输入</span></code></pre></td></tr></table>
+</span><span class="w"></span><span class="k">patch</span><span class="p">:</span><span class="w">
+</span><span class="w"></span><span class="w">  </span><span class="k">translator/enable_sentence</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w"> </span><span class="c"># 关闭句子输入</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
-</div>
-<p>领悟一下，详细还是看<a href="https://github.com/rime/home/wiki/CustomizationGuide">文档</a>吧。</p>
-
+</div><p>领悟一下，详细还是看<a href="https://github.com/rime/home/wiki/CustomizationGuide">文档</a>吧。</p>
 <p>怎样调试？要看看我们的补丁打得对不对，可以在部署之后看<code>~/Library/Rime/build/</code>目录里对应的文件，这些是打完补丁后最终生成的文件。</p>
 
     </div>
@@ -389,7 +362,8 @@ bash rime-install wubi pinyin-simp</code></pre></td></tr></table>
 
   <span class="copyright-year">
     &copy; 
-    2019
+    2019 - 
+    2020
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Jan&#39;s Blog</title>
@@ -6,10 +6,19 @@
     <description>Recent content in Posts on Jan&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 02 Dec 2019 20:11:39 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 04 Feb 2020 18:20:52 +0800</lastBuildDate>
     
 	<atom:link href="https://jan365.org/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Python 代码风格检查最佳实践</title>
+      <link>https://jan365.org/post/python-code-style-checking/</link>
+      <pubDate>Tue, 04 Feb 2020 18:20:52 +0800</pubDate>
+      
+      <guid>https://jan365.org/post/python-code-style-checking/</guid>
+      <description>本文介绍 Python 代码风格检查的实践，其中第3节渐进式介绍了4种方案，也可以直接看第4节“最佳实践”。 1. 项目需要统一的代码风格 代码风格类似文章的排版</description>
+    </item>
     
     <item>
       <title>Docker 里的进程为什么没有处理 TERM 信号</title>

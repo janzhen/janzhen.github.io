@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.58.3 with theme even" />
+<meta name="generator" content="Hugo 0.63.2 with theme even" />
 
 
 <link rel="canonical" href="https://jan365.org/post/migration/" />
@@ -46,16 +46,13 @@
 <meta property="article:modified_time" content="2019-04-20T19:10:58+08:00" />
 <meta itemprop="name" content="迁移到 Hugo">
 <meta itemprop="description" content="从 Jekyll 到 hexo，现在又迁移到 Hugo 了。在我看来，Hugo 的优势是不需要安装一大堆依赖，安装完 Hugo 本身之后马上就可以用了。 写了个简单的 Makefil">
-
-
 <meta itemprop="datePublished" content="2019-04-20T19:10:58&#43;08:00" />
 <meta itemprop="dateModified" content="2019-04-20T19:10:58&#43;08:00" />
 <meta itemprop="wordCount" content="245">
 
 
 
-<meta itemprop="keywords" content="" />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="迁移到 Hugo"/>
 <meta name="twitter:description" content="从 Jekyll 到 hexo，现在又迁移到 Hugo 了。在我看来，Hugo 的优势是不需要安装一大堆依赖，安装完 Hugo 本身之后马上就可以用了。 写了个简单的 Makefil"/>
 
@@ -132,16 +129,15 @@
     <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content always-active">
-    
+    <nav id="TableOfContents"></nav>
   </div>
 </div>
     <div class="post-content">
       <p>从 Jekyll 到 hexo，现在又迁移到 Hugo 了。在我看来，Hugo 的优势是不需要安装一大堆依赖，安装完 Hugo 本身之后马上就可以用了。</p>
-
-<p>写了个简单的 Makefile，方便操作，也防止忘记了 hugo 命令和流程。其中，deploy 参考了 Hugo 提供的托管到 github 的最佳实践：<a href="https://gohugo.io/hosting-and-deployment/hosting-on-github/">https://gohugo.io/hosting-and-deployment/hosting-on-github/</a> 。</p>
+<p>写了个简单的 Makefile，方便操作，也防止忘记了 hugo 命令和流程。其中，deploy 参考了 Hugo 提供的托管到 github 的最佳实践：https://gohugo.io/hosting-and-deployment/hosting-on-github/ 。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-makefile" data-lang="makefile"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -253,7 +249,8 @@
 
   <span class="copyright-year">
     &copy; 
-    2019
+    2019 - 
+    2020
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
