@@ -74,18 +74,17 @@ class Board {
         ]
     }
     click(cb_func) {
-        const board = this
         $(this.canvas).click(function(event) {
-            const rect = board.canvas.getBoundingClientRect()
+            const rect = this.canvas.getBoundingClientRect()
             const x = event.clientX - rect.left
             const y = event.clientY - rect.top
-            if(x > board.margin * board.cell_width
-                && x < (board.width + board.margin) * board.cell_width
-                && y > board.margin * board.cell_height
-                && y < (board.height + board.margin) * board.cell_height) {
+            if(x > this.margin * this.cell_width
+                && x < (this.width + this.margin) * this.cell_width
+                && y > this.margin * this.cell_height
+                && y < (this.height + this.margin) * this.cell_height) {
                 cb_func(x, y)
             }
-        })
+        }.bind(this))
     }
 }
 
@@ -112,16 +111,16 @@ class IntervalGame {
 
         this.drawAll()
         btn_start.click(function() {
+            this.board.clear()
             this.board.question_area.empty()
             this.run()
         }.bind(this))
     }
     run() {
-        const game = this
         this.board.click(function(x, y) {
-            var pos = game.board.xyToPosition(x, y)
-            game.click(pos[0], pos[1])
-        })
+            var pos = this.board.xyToPosition(x, y)
+            this.click(pos[0], pos[1])
+        }.bind(this))
         this.next()
     }
     click(row, col) {
@@ -214,5 +213,5 @@ class IntervalGame {
 }
 
 
-const board = new Board('.container')
+const board = new Board('.interval-train-container')
 const game = new IntervalGame(board)

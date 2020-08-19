@@ -48,7 +48,7 @@
 <meta itemprop="description" content="HHKB(Happy Hacking Keyboard)相信程序员都会听说过，无须多说，看看 GNU 教主用 HHKB 的风采。 如果恰好你手中的 HHKB 也是教主这个型号，那么是没有蓝牙功能的。现有的">
 <meta itemprop="datePublished" content="2019-05-20T20:05:04&#43;08:00" />
 <meta itemprop="dateModified" content="2019-05-20T20:05:04&#43;08:00" />
-<meta itemprop="wordCount" content="1193">
+<meta itemprop="wordCount" content="1192">
 
 
 
@@ -87,6 +87,8 @@
         <li class="mobile-menu-item">Tags</li>
       </a><a href="/categories/">
         <li class="mobile-menu-item">Categories</li>
+      </a><a href="/guitar-interval-train/">
+        <li class="mobile-menu-item">吉他音程训练</li>
       </a>
   </ul>
 </nav>
@@ -106,6 +108,8 @@
         <a class="menu-item-link" href="/tags/">Tags</a>
       </li><li class="menu-item">
         <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/guitar-interval-train/">吉他音程训练</a>
       </li>
   </ul>
 </nav>
@@ -195,17 +199,17 @@
 <p>HHKB 原生的配列有几处地方我一直不习惯，必须调整：</p>
 <ol>
 <li>退格与<code>|\</code>键的位置交换了；</li>
-<li><!-- raw HTML omitted -->~`<!-- raw HTML omitted --> 键不在1的左边。</li>
+<li><code>~`</code> 键不在1的左边。</li>
 </ol>
-<p>1好解决，轻松互换。2不好办，因为1的左边已经被<code>esc</code>占据，<code>esc</code>、<code>~</code>、<!-- raw HTML omitted -->`<!-- raw HTML omitted -->三个都是非常常用的键，怎样让它们在一个键上和平共处？</p>
-<p>首先，<code>~</code>是需要按<code>shift</code>输入，只要让<code>shift + esc = ~</code>即可，这个功能在 ydkb.io 里直接有提供。其次是 <!-- raw HTML omitted --> ` <!-- raw HTML omitted --> 键，这个按键我主要用在三个地方，频次从高到低分别是：</p>
+<p>1好解决，轻松互换。2不好办，因为1的左边已经被<code>esc</code>占据，<code>esc</code>、<code>~</code>、<code>`</code>三个都是非常常用的键，怎样让它们在一个键上和平共处？</p>
+<p>首先，<code>~</code>是需要按<code>shift</code>输入，只要让<code>shift + esc = ~</code>即可，这个功能在 ydkb.io 里直接有提供。其次是 <code> ` </code> 键，这个按键我主要用在三个地方，频次从高到低分别是：</p>
 <ol>
-<li><!-- raw HTML omitted --> cmd + ` <!-- raw HTML omitted --> 在 MacOS 里是同应用不同窗口间的切换；</li>
+<li><code> cmd + ` </code> 在 MacOS 里是同应用不同窗口间的切换；</li>
 <li>markdown 的 fence code block；</li>
 <li>shell、sql 里用到。</li>
 </ol>
-<p>我打算只解决1，因为2、3不常用，可以继续用<code>=</code>右边的按键。解决办法是把 <code>cmd</code> 改成 <code>cmd &amp; 层1</code>，然后把 <!-- raw HTML omitted -->`<!-- raw HTML omitted --> 放到层1的<!-- raw HTML omitted -->esc<!-- raw HTML omitted -->上。</p>
-<p>这样，<code>cmd + esc</code> 就变成 <!-- raw HTML omitted -->cmd + `<!-- raw HTML omitted -->了。而 <!-- raw HTML omitted -->cmd + 其他<!-- raw HTML omitted -->则不受影响，因为其他键都留空，就会穿透到层0。</p>
+<p>我打算只解决1，因为2、3不常用，可以继续用<code>=</code>右边的按键。解决办法是把 <code>cmd</code> 改成 <code>cmd &amp; 层1</code>，然后把 <code>`</code> 放到层1的<code>esc</code>上。</p>
+<p>这样，<code>cmd + esc</code> 就变成 <code>cmd + `</code>了。而 <code>cmd + 其他</code>则不受影响，因为其他键都留空，就会穿透到层0。</p>
 <p>最后，附上我的配列。</p>
 <p>Layer 0:
 <img src="l0.png" alt=""></p>

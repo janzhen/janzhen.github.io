@@ -48,7 +48,7 @@
 <meta itemprop="description" content="reveal.js 是一个 html 幻灯片框架，如果要写 html 幻灯片，这就是最好的选择了。Pandoc 是 Markup 格式之间转换的瑞士军刀。 为什么不用 PowerPoint 或者 Keynote？Pand">
 <meta itemprop="datePublished" content="2019-05-14T20:45:01&#43;08:00" />
 <meta itemprop="dateModified" content="2019-05-14T20:45:01&#43;08:00" />
-<meta itemprop="wordCount" content="1264">
+<meta itemprop="wordCount" content="1291">
 
 
 
@@ -87,6 +87,8 @@
         <li class="mobile-menu-item">Tags</li>
       </a><a href="/categories/">
         <li class="mobile-menu-item">Categories</li>
+      </a><a href="/guitar-interval-train/">
+        <li class="mobile-menu-item">吉他音程训练</li>
       </a>
   </ul>
 </nav>
@@ -106,6 +108,8 @@
         <a class="menu-item-link" href="/tags/">Tags</a>
       </li><li class="menu-item">
         <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/guitar-interval-train/">吉他音程训练</a>
       </li>
   </ul>
 </nav>
@@ -165,7 +169,23 @@
 </li>
 </ul>
 <p>以下是一个用Pandoc + reveal.js 生成的幻灯片。</p>
-<!-- raw HTML omitted -->
+<div class="aspect-ratio"><iframe src="slide_example.html"></iframe></div>
+<style>
+.aspect-ratio {
+  position: relative;
+  width: 80%;
+  height: 0;
+  padding-bottom: 44.8%;
+  margin: auto;
+}
+.aspect-ratio iframe {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+}
+</style>
 <p>reveal.js 要用 html 来编写，虽然有着巨大的灵活性，但是相对来说比较繁琐。那么我们自然能想到用 markdown 来写 html，reveal.js 本身是支持 markdown 的，但是 Pandoc 更为专业，提供了对 reveal.js 的支持，且提供了很多方便的特性，如分栏、演讲者笔记、暂停、分批出现等。</p>
 <p>生成过程如下图所示。</p>
 <p><img src="pandoc_revealjs.svg" alt=""></p>
