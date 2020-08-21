@@ -98,8 +98,10 @@ class Board {
             'max-width': '400px',
             'margin': '0 auto'
         })
-      this.container.append($('<div class="question"></div>'))
-      this.container.append($('<canvas></canvas>'))
+        const div_question = $('<div class="question"></div>')
+        div_question.css('height', '2em')
+        this.container.append(div_question)
+        this.container.append($('<canvas></canvas>'))
     }
 }
 
@@ -180,7 +182,7 @@ class IntervalGame {
             this.state.note = this.randomNote()
             this.state.question = this.removeOutsidePosition(this.positionOfNote(this.state.note))
             this.state.answer = []
-            this.board.question_area.text('Find all ' + this.state.note + '.')
+            this.board.question_area.text('Find all ' + this.state.note + '. ')
             this.board.question_area.append(this.hint_btn)
             this.drawRootNotes()
         }
