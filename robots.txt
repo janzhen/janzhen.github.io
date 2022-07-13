@@ -1,0 +1,3 @@
+User-agent: *
+Disallow:
+Sitemap: https://jan365.org/sitemap.xml

@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>编程 on Jan's Blog</title><link>https://jan365.org/categories/%E7%BC%96%E7%A8%8B/</link><description>Recent content in 编程 on Jan's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 04 Feb 2020 18:20:52 +0800</lastBuildDate><atom:link href="https://jan365.org/categories/%E7%BC%96%E7%A8%8B/index.xml" rel="self" type="application/rss+xml"/><item><title>Python代码风格检查最佳实践</title><link>https://jan365.org/posts/python-code-style-checking/</link><pubDate>Tue, 04 Feb 2020 18:20:52 +0800</pubDate><guid>https://jan365.org/posts/python-code-style-checking/</guid><description>本文介绍 Python 代码风格检查的实践，其中第3节渐进式介绍了4种方案，也可以直接看第4节“最佳实践”。 1. 项目需要统一的代码风格 代码风格类似文章的排版</description><content:encoded><![CDATA[<p>本文介绍 Python 代码风格检查的实践，其中第3节渐进式介绍了4种方案，也可以直接看第4节“最佳实践”。</p>
+<h2 id="1-项目需要统一的代码风格">1. 项目需要统一的代码风格</h2>
+<p>代码风格类似文章的排版要求，一本杂志、书籍往往由多人合著，作者们需要达成共识用统一的排版风格。程序同样由多个程序员合作编写而成，甚至还会互相修改其他成员的代码，统一的风格犹为重要。</p>
+<h2 id="2-python-项目的代码风格">2. Python 项目的代码风格</h2>
+<p>Python 项目的代码风格，我认为需要分成两层：</p>
+<ol>
+<li><a href="https://www.python.org/dev/peps/pep-0008/">PEP 8</a>，这是 Python 社区的共识，应该作为我们项目代码风格的底线。然而，PEP 8 的规定相当宽泛，符合 PEP 8的前提下，仍然可以写出风格迥异代码。因此，项目通常又会在 PEP 8的基础上制定</li>
+<li>项目风格要求。在PEP 8基础上制定项目风格，实际上是基于一些的原因增加限制。比如规定字典元素太多时该如何换行。风格一，尽量在一行写入最多的元素，原因是这样能使代码更紧凑。</li>
+</ol>
+<pre tabindex="0"><code>{&#39;key1&#39;: &#39;value1&#39;, &#39;key2&#39;: &#39;value2&#39;, &#39;key3&#39;: &#39;value3&#39;, &#39;key4&#39;: &#39;value4&#39;,
+ &#39;key5&#39;: &#39;value5&#39;, &#39;key6&#39;: &#39;value6&#39;}
+</code></pre><p>风格二，一行一个元素，原因是将来增删改元素只会影响到一行，方便 diff review。</p>
+<pre tabindex="0"><code>{
+    &#39;key1&#39;: &#39;value1&#39;,
+    &#39;key2&#39;: &#39;value2&#39;,
+    &#39;key3&#39;: &#39;value3&#39;,
+    &#39;key4&#39;: &#39;value4&#39;,
+}
+</code></pre><p>都有道理，需要项目成员达成共识，制定出项目的风格要求。</p>
+<h2 id="3-代码风格检查">3. 代码风格检查</h2>
+<p>代码风格制定好了，<strong>如果没有相应检查机制，我相信制定好的代码风格并不会得到完整的执行。</strong> 如何检查 Python 代码风格是本文重点。我把代码风格检查机制按照自动化程度分成以下层次：</p>
+<ol>
+<li>人工检查；</li>
+<li>手动运行检查器；</li>
+<li>自动运行检查器；</li>
+<li>自动修正代码风格；</li>
+</ol>
+<h3 id="31-人工检查">3.1. 人工检查</h3>
+<p>人工检查是最原始的，在 code review 的时候，看看是不是有代码风格问题。熟悉 PEP 8的 Python 程序员应该具备肉眼检查 PEP 8风格的能力，通常风格问题是很碍眼的，想看不出来都难。
+然而人工检查存在着明显的问题：</p>
+<ol>
+<li>code review 还要把精力放在代码风格上；</li>
+<li>code review 阶段还要提一批风格相关的 issues；</li>
+<li>code review 阶段还得来回修改代码风格问题；</li>
+<li>人毕竟不是机器，可能有遗漏。</li>
+</ol>
+<p><strong>缺点：</strong> 显然，人工检查存在效率和严谨性的问题，更何况有些项目并没有对每一个 commit 做 code review，人工检查得等到什么时候触碰到这些代码时才能进行。</p>
+<h3 id="32-手动运行检查器">3.2. 手动运行检查器</h3>
+<p>代码风格检查工作如此的机械化，显然适合让机器做，而不必浪费程序员的精力。</p>
+<p>常用的检查器有：<a href="https://pypi.org/project/pep8/">pep8 · PyPI</a>、<a href="https://flake8.pycqa.org/en/latest/">flake8</a>、<a href="https://flake8.pycqa.org/en/latest/">pylint</a>。推荐 flake8，其结合 pep8 和其他一些风格检查，基本上忠实于 pep8，不会带来太多打扰。不推荐 pylint 是因为 pylint 的默认配置非常糟糕（不是 PEP 8，也不是哪个社区的共识），非开箱即用，得根据项目代码风格精心配置，否则相当打扰。不过 flake8 的可定制性较差，额外的项目风格无法检测，pylint 相对来说可定制性更高。</p>
+<p>有了检查器，程序员可以在提交代码前运行检查，根检查器报告修改，直到完全通过。进阶一点可以用相应的编辑器插件，边写边检查。</p>
+<p><strong>缺点：</strong> 手动运行的问题是，程序员可能忘记运行了，或者新加入项目的程序员根本不知道有这个规则。</p>
+<p>那么我们自然会想到自动运行检查器。</p>
+<h3 id="33-自动运行检查器">3.3. 自动运行检查器</h3>
+<p>自动运行检查器有这些方案：</p>
+<ol>
+<li><a href="https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks">Git Hooks</a>，git hooks 又分为
+<ol>
+<li>客户端 hooks，</li>
+<li>服务端 hooks；</li>
+</ol>
+</li>
+<li><a href="https://en.wikipedia.org/wiki/Continuous_integration">CI</a> 持续集成。</li>
+</ol>
+<p><strong>这些方案中我推荐客户端 Git Hooks。</strong> 相对服务端 hooks，客户端 hooks 不需要服务端支持，适应性高；相对于 CI，搭建成本低，且在代码提交前就检查好风格，而不是到了集成阶段再来检查。</p>
+<p>客户端 hooks 的原理非常简单，.git/hooks 目录下有很多 .sample 文件，是各个阶段 hook 的例子。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ ls .git/hooks/
+</span></span><span style="display:flex;"><span>applypatch-msg.sample	   pre-applypatch.sample  pre-receive.sample
+</span></span><span style="display:flex;"><span>commit-msg.sample	   pre-commit.sample	  prepare-commit-msg.sample
+</span></span><span style="display:flex;"><span>fsmonitor-watchman.sample  pre-push.sample	  update.sample
+</span></span><span style="display:flex;"><span>post-update.sample	   pre-rebase.sample
+</span></span></code></pre></div><p>这里我们需要 pre-commit hook，创建一个 pre-commit 文件，内容是 shell 脚本，运行检查器。如果检查不通过就会阻止 commit。通过这样的机制就能确保检查器运行且检查通过。</p>
+<p>然而，客户端的 hooks 是在本地的，不在仓库里管理，也就是说 hooks 不能共享不能同步。为了解决这个问题，又有了 <a href="https://pre-commit.com/">pre-commit</a> 这个工具，只需要在仓库根目录放置一个 .pre-commit-config.yaml ，定义需要的 hooks（github 上很多开源的 hook 可以在这里直接引用，当然也包括 flake8），把这个文件提交到仓库。然后在客户端运行一次 <code>pre-commit install --install-hooks</code> 即可注册到 .git/hooks/pre-commit 里，后继 .pre-commit-config.yaml 更新也同步到各个客户端。用法详见第4节。</p>
+<p>到目前为止，已经做到确保代码在提交到仓库之前是通过代码风格检查的。</p>
+<p><strong>缺点：</strong> 要说还有什么不足，那就是检查虽然是自动，但修正还得手动。那么有没有自动修正的方案？</p>
+<h3 id="34-自动修正代码风格">3.4. 自动修正代码风格</h3>
+<p>Python 代码风格自动修正，目前最好的应该是 <a href="https://black.readthedocs.io/en/stable/">Black</a>。Black 是 PSF（Python Software Foundation，Python 软件基金会）的项目。为什么要强调是 PSF 的项目？<strong>因为符合 PEP 8的写法可以有很多种，而修正工具只能修正成其中一种。</strong> 那么哪一种写法才大家都喜欢的？这就需要项目成员达成共识，也就是第2节提到的项目的风格要求。<strong>而 Black 作为 PSF 的项目，一定程度上代表了 Python 社区的共识。</strong> 那么，我们没必要再花精力制定项目代码风格，直接交给 Black 就好了。</p>
+<p>Black 在<a href="https://black.readthedocs.io/en/stable/the_black_code_style.html">文档</a>详细介绍了其代码风格及相应的原因，比如为什么默认一行的长度限制是88字符（可以配置），比 PEP 8标准增加10%，有兴趣可以看一下。</p>
+<p>同样，把 Black 也加到 pre-commit hook 里，那么在提交代码的时候就会自动修正代码风格。再加一道风格检查，把不能自动修正的提示出来，让提交者手动修正。</p>
+<p>这样就形成了本文的最佳实践，具体做法见下一节。</p>
+<h2 id="4-最佳实践">4. 最佳实践</h2>
+<p>在仓库根目录放置以下3个文件，并提交。执行一次  <code>make init</code> 即完成所有配置工作。</p>
+<p>实现的功能有：在 commit 的时候，</p>
+<ol>
+<li>自动重排 import 顺序，</li>
+<li>修正代码风格，</li>
+<li>检查代码风格，</li>
+<li>修正其他文件格式问题。</li>
+</ol>
+<p>.flake8</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ini" data-lang="ini"><span style="display:flex;"><span><span style="color:#ff79c6">[flake8]</span>
+</span></span><span style="display:flex;"><span><span style="color:#50fa7b">max-line-length</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">80</span>
+</span></span><span style="display:flex;"><span><span style="color:#50fa7b">select</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">C,E,F,W,B,B950</span>
+</span></span><span style="display:flex;"><span><span style="color:#50fa7b">ignore</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">E203,E501,W503</span>
+</span></span></code></pre></div><p>.pre-commit-config.yaml：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#ff79c6">repos</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#ff79c6">repo</span>: https://github.com/asottile/reorder_python_imports
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">rev</span>: v1.8.0
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">hooks</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ff79c6">id</span>: reorder-python-imports
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">name</span>: Reorder Python imports (src, tests)
+</span></span><span style="display:flex;"><span>  - <span style="color:#ff79c6">repo</span>: https://github.com/python/black
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">rev</span>: stable
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">hooks</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ff79c6">id</span>: black
+</span></span><span style="display:flex;"><span>  - <span style="color:#ff79c6">repo</span>: https://gitlab.com/pycqa/flake8
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">rev</span>: <span style="color:#bd93f9">3.7.9</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">hooks</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ff79c6">id</span>: flake8
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">additional_dependencies</span>: [flake8-bugbear]
+</span></span><span style="display:flex;"><span>  - <span style="color:#ff79c6">repo</span>: https://github.com/pre-commit/pre-commit-hooks
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">rev</span>: v2.4.0
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">hooks</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ff79c6">id</span>: check-byte-order-marker
+</span></span><span style="display:flex;"><span>      - <span style="color:#ff79c6">id</span>: trailing-whitespace
+</span></span><span style="display:flex;"><span>      - <span style="color:#ff79c6">id</span>: end-of-file-fixer
+</span></span></code></pre></div><p>Makefile:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-makefile" data-lang="makefile"><span style="display:flex;"><span><span style="color:#50fa7b">init</span><span style="color:#ff79c6">:</span>
+</span></span><span style="display:flex;"><span>	python3 -m venv .venv
+</span></span><span style="display:flex;"><span>	.venv/bin/pip install pre-commit
+</span></span><span style="display:flex;"><span>	.venv/bin/pre-commit install --install-hooks
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#50fa7b">clean</span><span style="color:#ff79c6">:</span>
+</span></span><span style="display:flex;"><span>	rm -rf .venv
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#50fa7b">.PHONY</span><span style="color:#ff79c6">:</span> init clean
+</span></span></code></pre></div><p>该方案受 <a href="https://github.com/pallets/flask/blob/master/CONTRIBUTING.rst">Flask 的 contributing guidelines</a> 启发。</p>
+]]></content:encoded></item><item><title>Docker 里的进程为什么没有处理 TERM 信号</title><link>https://jan365.org/posts/process-in-docker-does-not-handle-term/</link><pubDate>Mon, 02 Dec 2019 20:11:39 +0800</pubDate><guid>https://jan365.org/posts/process-in-docker-does-not-handle-term/</guid><description>现象 在一个部署在 Kubernetes 的项目里，每次重新部署的都会发现有两个 pods 处于 terminating 状态的时间特别长，于是着手分析这个问题。 Kubernetes 是如何关闭一个容器的？文档 Pods - Kubernetes 介</description><content:encoded><![CDATA[<h2 id="现象">现象</h2>
+<p>在一个部署在 Kubernetes 的项目里，每次重新部署的都会发现有两个 pods 处于 terminating 状态的时间特别长，于是着手分析这个问题。</p>
+<p>Kubernetes 是如何关闭一个容器的？文档 <a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/#termination-of-pods">Pods - Kubernetes</a> 介绍，Kubernetes 会向容器里的进程发 TERM 信号，如果进程在一定时间（默认30秒）内没有关闭，Kubernetes 会发 KILL 信号。</p>
+<p>猜想是因为进程没有处理 TERM 信号，在30秒超时后才被 KILL 信号关闭。验证猜想：</p>
+<pre tabindex="0"><code>$ time kubectl delete pod POD_NAME
+</code></pre><p>可以看到用时大概是30秒，一定程度上验证了这个猜想。再进一步，直接向进程发 TERM 信号：</p>
+<pre tabindex="0"><code>$ kubectl exec -it POD_NAME -- kill -TERM 1
+$ kubectl get pods
+</code></pre><p>Pod 还在，没有任何反应，可以验证进程没有处理 TERM 信号。</p>
+<p><strong>然而，shell 里直接运行程序，再发 TERM 信号，进程会马上关闭。<strong>那么现在问题是</strong>为什么进程在 Docker 里就不处理 TERM 信号了？</strong></p>
+<p>到这里，直觉告诉我们，在程序里显式处理 TERM 信号大概能解决问题。然而，我还是想知道为什么到了 Docker 环境情况会变得不一样。我们先来看看信号是如何工作的。</p>
+<h2 id="信号如何工作">信号如何工作</h2>
+<p>信号的处理有以下3种情况：</p>
+<ol>
+<li>如果进程注册了信号的处理函数，那么内核会调用相应的函数来处理；</li>
+<li>如果进程设置了忽略该信号，则内核直接忽略；</li>
+<li>如果进程设置了屏蔽该信号，则内核会放到队列里；</li>
+<li>对于部分信号，如果既没有注册处理函数，也没有忽略和屏蔽，则内核会有相应的默认处理，通过 <a href="http://man7.org/linux/man-pages/man7/signal.7.html">man 7 signal</a> 可以看到，<strong>TERM 的默认处理是关闭进程</strong>。</li>
+</ol>
+<p>我们可以在 <code>/proc/</code> 文件系统里观察进程的信号设置：</p>
+<pre tabindex="0"><code>$ kubectl exec POD_NAME -- grep Sig /proc/1/status
+
+SigQ:	0/15733
+SigPnd:	0000000000000000
+SigBlk:	0000000000000000
+SigIgn:	0000000001001000
+SigCgt:	0000000180000002
+</code></pre><p>SigBlk、SigIgn、SigCgt 分别是屏蔽、忽略和捕捉（即注册了处理函数）的mask，十六进制，转成二进制后，每一位对应一个信号编号。<code>kill -l</code> 可以列出信号编号对应的信号。</p>
+<p>**通过上面的信息可以发现编号15的 TERM 信号在3组 mask 里都没有，应该属于情况4，由内核默认处理，也就是关闭进程。**但是实际上并不符合预期。我们做一些实验分析。</p>
+<h2 id="分析">分析</h2>
+<p>为了简化问题，做了一些尝试后发现只需要在 docker 环境里跑 sleep 进程就能重现。</p>
+<pre tabindex="0"><code>$ docker run -it --rm -d alpine /bin/sleep 3600 # 创建一个容器，跑 sleep 进程
+
+44c2fa4ba13066e3b10f78484144fdc06bb87d132a87006a697521fa629e6f74
+
+$ docker exec -it 44c2fa4ba13066 /bin/sh  # 进入容器，跑 shell
+/ # grep Sig /proc/1/status # sleep 没有任何信号处理的设置
+
+SigQ:	0/7866
+SigPnd:	0000000000000000
+SigBlk:	0000000000000000
+SigIgn:	0000000000000000
+SigCgt:	0000000000000000
+
+/ # kill -TERM 1 # 向 sleep 进程发信号
+/ # ps -ef # 没有默认处理，没有关闭
+
+PID   USER     TIME  COMMAND
+    1 root      0:00 /bin/sleep 3600
+    7 root      0:00 /bin/sh
+   13 root      0:00 ps -ef
+</code></pre><p>是 Docker 在信号处理上做了一些特殊处理吗？从原理上分析是没有的，我们通过实验来验证，还是在上面的环境里，我们在 shell 后台跑一个 sleep 进程，再发信号试试。</p>
+<pre tabindex="0"><code>/ # sleep 1800 &amp;
+/ # ps -ef
+
+PID   USER     TIME  COMMAND
+    1 root      0:00 /bin/sleep 3600
+    7 root      0:00 /bin/sh
+   16 root      0:00 sleep 1800
+   17 root      0:00 ps -ef
+
+/ # kill -TERM 16
+/ #
+[1]+  Terminated                 sleep 1800
+</code></pre><p>这次 sleep 进程符合预期正常关闭了。那么原因很明显的，<strong>特殊的是 PID 1</strong>。</p>
+<h2 id="特殊的-pid-1">特殊的 PID 1</h2>
+<p><a href="http://man7.org/linux/man-pages/man2/kill.2.html#NOTES">man 2 kill</a> 告诉我们：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plaintext" data-lang="plaintext"><span style="display:flex;"><span>The only signals that can be sent to process ID 1, the init process,
+</span></span><span style="display:flex;"><span>are those for which init has explicitly installed signal handlers.
+</span></span><span style="display:flex;"><span>This is done to assure the system is not brought down accidentally.
+</span></span></code></pre></div><p>PID 1 进程通常是 systemd、init，扮演着重要的角色，对信号的处理是极其谨慎的，防止意外退出导致 <a href="https://en.wikipedia.org/wiki/Kernel_panic">Kernel panic</a>。然而在 docker 里，PID 1成了我们要运行的程序，但却享受着内核的特殊“保护”。</p>
+<h2 id="结论">结论</h2>
+<p>在 Docker 里，一定要显式处理 TERM 信号。</p>
+]]></content:encoded></item></channel></rss>

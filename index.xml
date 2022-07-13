@@ -1,0 +1,608 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Jan's Blog</title><link>https://jan365.org/</link><description>Recent content on Jan's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Mon, 20 Jun 2022 23:38:41 +0800</lastBuildDate><atom:link href="https://jan365.org/index.xml" rel="self" type="application/rss+xml"/><item><title>重新装修了博客</title><link>https://jan365.org/posts/new-blog/</link><pubDate>Mon, 20 Jun 2022 23:38:41 +0800</pubDate><guid>https://jan365.org/posts/new-blog/</guid><description>重新装修了博客。回头一看，已有两年没有更新博客了。博客更多是写给自己看的，假装在跟别人说，其实是通过这种形式帮自己弄懂一些事情。 这次重新装修</description><content:encoded><![CDATA[<p>重新装修了博客。回头一看，已有两年没有更新博客了。博客更多是写给自己看的，假装在跟别人说，其实是通过这种形式帮自己弄懂一些事情。</p>
+<p>这次重新装修博客，考察了一圈了现在的SSG（static site generator）工具之后，还是选择了hugo，容易安装，设计合理，生态好。</p>
+<h2 id="主题">主题</h2>
+<p>Hugo离不开主题，主题对于Hugo来说不止是个样式，更是功能扩展，看Hugo的安装文档，安装主题不是可选的。官方的主题列表<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>是安装github star数排的，这次的选了目前排第二名的PaperMod<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>，原因是除了star数，还有活跃的维护，简洁的外观和功能，刚好够用的功能。</p>
+<p>说到刚好够用的功能，我偏好轻量级的东西，不喜欢大而全，如Unix哲学所说，“Do One Thing and Do It Well”<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>。我可以完全看一遍PaperMod提供的所有功能，配置文件可以在理解后手动写，而不是复制粘贴不知道其含义。</p>
+<p>由于Hugo安装步骤里就安装了主题，我以前搞不清楚哪些是Hugo提供的功能，哪些是PaperMod提供的功能。这一次从简洁的主题入手，我算是大概弄明白了。</p>
+<h2 id="自动化部署">自动化部署</h2>
+<p>我的这篇<a href="/posts/migration/">博文</a>里提到的部署到github pages的方法已经过时了，官方的最佳实践<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>也已经更新。Github提供了CI设施，称为Action，可以通过仓库的一些事件来触发一些脚本运行。</p>
+<p>我参考了官方文章<sup id="fnref1:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>通过推送事件，触发CI做Hugo构建，并把构建后的网站推送到github pages。还做了一点小调整，</p>
+<ul>
+<li>源码和pages分开两个仓库，这样源码仓库可以设置成私有；</li>
+<li>pages仓库每次只保留一个commit，这样其他人就看不到修改记录；</li>
+<li>CNAME文件的生成也交由CI完成。</li>
+</ul>
+<p>配置完之后，我只管写博客，写完后push，后续部署相关的工作都自动化了。</p>
+<h2 id="后记">后记</h2>
+<p>最后，希望自己接下来会更新博客，写写编程、工具、吉他、摄影等方面吧。</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p><a href="https://themes.gohugo.io/">https://themes.gohugo.io/</a>&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p><a href="https://themes.gohugo.io/themes/hugo-papermod/">https://themes.gohugo.io/themes/hugo-papermod/</a>&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p><a href="https://en.wikipedia.org/wiki/Unix_philosophy#Do_One_Thing_and_Do_It_Well">https://en.wikipedia.org/wiki/Unix_philosophy#Do_One_Thing_and_Do_It_Well</a>&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4">
+<p><a href="https://gohugo.io/hosting-and-deployment/hosting-on-github/">https://gohugo.io/hosting-and-deployment/hosting-on-github/</a>&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+]]></content:encoded></item><item><title>Python代码风格检查最佳实践</title><link>https://jan365.org/posts/python-code-style-checking/</link><pubDate>Tue, 04 Feb 2020 18:20:52 +0800</pubDate><guid>https://jan365.org/posts/python-code-style-checking/</guid><description>本文介绍 Python 代码风格检查的实践，其中第3节渐进式介绍了4种方案，也可以直接看第4节“最佳实践”。 1. 项目需要统一的代码风格 代码风格类似文章的排版</description><content:encoded><![CDATA[<p>本文介绍 Python 代码风格检查的实践，其中第3节渐进式介绍了4种方案，也可以直接看第4节“最佳实践”。</p>
+<h2 id="1-项目需要统一的代码风格">1. 项目需要统一的代码风格</h2>
+<p>代码风格类似文章的排版要求，一本杂志、书籍往往由多人合著，作者们需要达成共识用统一的排版风格。程序同样由多个程序员合作编写而成，甚至还会互相修改其他成员的代码，统一的风格犹为重要。</p>
+<h2 id="2-python-项目的代码风格">2. Python 项目的代码风格</h2>
+<p>Python 项目的代码风格，我认为需要分成两层：</p>
+<ol>
+<li><a href="https://www.python.org/dev/peps/pep-0008/">PEP 8</a>，这是 Python 社区的共识，应该作为我们项目代码风格的底线。然而，PEP 8 的规定相当宽泛，符合 PEP 8的前提下，仍然可以写出风格迥异代码。因此，项目通常又会在 PEP 8的基础上制定</li>
+<li>项目风格要求。在PEP 8基础上制定项目风格，实际上是基于一些的原因增加限制。比如规定字典元素太多时该如何换行。风格一，尽量在一行写入最多的元素，原因是这样能使代码更紧凑。</li>
+</ol>
+<pre tabindex="0"><code>{&#39;key1&#39;: &#39;value1&#39;, &#39;key2&#39;: &#39;value2&#39;, &#39;key3&#39;: &#39;value3&#39;, &#39;key4&#39;: &#39;value4&#39;,
+ &#39;key5&#39;: &#39;value5&#39;, &#39;key6&#39;: &#39;value6&#39;}
+</code></pre><p>风格二，一行一个元素，原因是将来增删改元素只会影响到一行，方便 diff review。</p>
+<pre tabindex="0"><code>{
+    &#39;key1&#39;: &#39;value1&#39;,
+    &#39;key2&#39;: &#39;value2&#39;,
+    &#39;key3&#39;: &#39;value3&#39;,
+    &#39;key4&#39;: &#39;value4&#39;,
+}
+</code></pre><p>都有道理，需要项目成员达成共识，制定出项目的风格要求。</p>
+<h2 id="3-代码风格检查">3. 代码风格检查</h2>
+<p>代码风格制定好了，<strong>如果没有相应检查机制，我相信制定好的代码风格并不会得到完整的执行。</strong> 如何检查 Python 代码风格是本文重点。我把代码风格检查机制按照自动化程度分成以下层次：</p>
+<ol>
+<li>人工检查；</li>
+<li>手动运行检查器；</li>
+<li>自动运行检查器；</li>
+<li>自动修正代码风格；</li>
+</ol>
+<h3 id="31-人工检查">3.1. 人工检查</h3>
+<p>人工检查是最原始的，在 code review 的时候，看看是不是有代码风格问题。熟悉 PEP 8的 Python 程序员应该具备肉眼检查 PEP 8风格的能力，通常风格问题是很碍眼的，想看不出来都难。
+然而人工检查存在着明显的问题：</p>
+<ol>
+<li>code review 还要把精力放在代码风格上；</li>
+<li>code review 阶段还要提一批风格相关的 issues；</li>
+<li>code review 阶段还得来回修改代码风格问题；</li>
+<li>人毕竟不是机器，可能有遗漏。</li>
+</ol>
+<p><strong>缺点：</strong> 显然，人工检查存在效率和严谨性的问题，更何况有些项目并没有对每一个 commit 做 code review，人工检查得等到什么时候触碰到这些代码时才能进行。</p>
+<h3 id="32-手动运行检查器">3.2. 手动运行检查器</h3>
+<p>代码风格检查工作如此的机械化，显然适合让机器做，而不必浪费程序员的精力。</p>
+<p>常用的检查器有：<a href="https://pypi.org/project/pep8/">pep8 · PyPI</a>、<a href="https://flake8.pycqa.org/en/latest/">flake8</a>、<a href="https://flake8.pycqa.org/en/latest/">pylint</a>。推荐 flake8，其结合 pep8 和其他一些风格检查，基本上忠实于 pep8，不会带来太多打扰。不推荐 pylint 是因为 pylint 的默认配置非常糟糕（不是 PEP 8，也不是哪个社区的共识），非开箱即用，得根据项目代码风格精心配置，否则相当打扰。不过 flake8 的可定制性较差，额外的项目风格无法检测，pylint 相对来说可定制性更高。</p>
+<p>有了检查器，程序员可以在提交代码前运行检查，根检查器报告修改，直到完全通过。进阶一点可以用相应的编辑器插件，边写边检查。</p>
+<p><strong>缺点：</strong> 手动运行的问题是，程序员可能忘记运行了，或者新加入项目的程序员根本不知道有这个规则。</p>
+<p>那么我们自然会想到自动运行检查器。</p>
+<h3 id="33-自动运行检查器">3.3. 自动运行检查器</h3>
+<p>自动运行检查器有这些方案：</p>
+<ol>
+<li><a href="https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks">Git Hooks</a>，git hooks 又分为
+<ol>
+<li>客户端 hooks，</li>
+<li>服务端 hooks；</li>
+</ol>
+</li>
+<li><a href="https://en.wikipedia.org/wiki/Continuous_integration">CI</a> 持续集成。</li>
+</ol>
+<p><strong>这些方案中我推荐客户端 Git Hooks。</strong> 相对服务端 hooks，客户端 hooks 不需要服务端支持，适应性高；相对于 CI，搭建成本低，且在代码提交前就检查好风格，而不是到了集成阶段再来检查。</p>
+<p>客户端 hooks 的原理非常简单，.git/hooks 目录下有很多 .sample 文件，是各个阶段 hook 的例子。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ ls .git/hooks/
+</span></span><span style="display:flex;"><span>applypatch-msg.sample	   pre-applypatch.sample  pre-receive.sample
+</span></span><span style="display:flex;"><span>commit-msg.sample	   pre-commit.sample	  prepare-commit-msg.sample
+</span></span><span style="display:flex;"><span>fsmonitor-watchman.sample  pre-push.sample	  update.sample
+</span></span><span style="display:flex;"><span>post-update.sample	   pre-rebase.sample
+</span></span></code></pre></div><p>这里我们需要 pre-commit hook，创建一个 pre-commit 文件，内容是 shell 脚本，运行检查器。如果检查不通过就会阻止 commit。通过这样的机制就能确保检查器运行且检查通过。</p>
+<p>然而，客户端的 hooks 是在本地的，不在仓库里管理，也就是说 hooks 不能共享不能同步。为了解决这个问题，又有了 <a href="https://pre-commit.com/">pre-commit</a> 这个工具，只需要在仓库根目录放置一个 .pre-commit-config.yaml ，定义需要的 hooks（github 上很多开源的 hook 可以在这里直接引用，当然也包括 flake8），把这个文件提交到仓库。然后在客户端运行一次 <code>pre-commit install --install-hooks</code> 即可注册到 .git/hooks/pre-commit 里，后继 .pre-commit-config.yaml 更新也同步到各个客户端。用法详见第4节。</p>
+<p>到目前为止，已经做到确保代码在提交到仓库之前是通过代码风格检查的。</p>
+<p><strong>缺点：</strong> 要说还有什么不足，那就是检查虽然是自动，但修正还得手动。那么有没有自动修正的方案？</p>
+<h3 id="34-自动修正代码风格">3.4. 自动修正代码风格</h3>
+<p>Python 代码风格自动修正，目前最好的应该是 <a href="https://black.readthedocs.io/en/stable/">Black</a>。Black 是 PSF（Python Software Foundation，Python 软件基金会）的项目。为什么要强调是 PSF 的项目？<strong>因为符合 PEP 8的写法可以有很多种，而修正工具只能修正成其中一种。</strong> 那么哪一种写法才大家都喜欢的？这就需要项目成员达成共识，也就是第2节提到的项目的风格要求。<strong>而 Black 作为 PSF 的项目，一定程度上代表了 Python 社区的共识。</strong> 那么，我们没必要再花精力制定项目代码风格，直接交给 Black 就好了。</p>
+<p>Black 在<a href="https://black.readthedocs.io/en/stable/the_black_code_style.html">文档</a>详细介绍了其代码风格及相应的原因，比如为什么默认一行的长度限制是88字符（可以配置），比 PEP 8标准增加10%，有兴趣可以看一下。</p>
+<p>同样，把 Black 也加到 pre-commit hook 里，那么在提交代码的时候就会自动修正代码风格。再加一道风格检查，把不能自动修正的提示出来，让提交者手动修正。</p>
+<p>这样就形成了本文的最佳实践，具体做法见下一节。</p>
+<h2 id="4-最佳实践">4. 最佳实践</h2>
+<p>在仓库根目录放置以下3个文件，并提交。执行一次  <code>make init</code> 即完成所有配置工作。</p>
+<p>实现的功能有：在 commit 的时候，</p>
+<ol>
+<li>自动重排 import 顺序，</li>
+<li>修正代码风格，</li>
+<li>检查代码风格，</li>
+<li>修正其他文件格式问题。</li>
+</ol>
+<p>.flake8</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ini" data-lang="ini"><span style="display:flex;"><span><span style="color:#ff79c6">[flake8]</span>
+</span></span><span style="display:flex;"><span><span style="color:#50fa7b">max-line-length</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">80</span>
+</span></span><span style="display:flex;"><span><span style="color:#50fa7b">select</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">C,E,F,W,B,B950</span>
+</span></span><span style="display:flex;"><span><span style="color:#50fa7b">ignore</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">E203,E501,W503</span>
+</span></span></code></pre></div><p>.pre-commit-config.yaml：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#ff79c6">repos</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#ff79c6">repo</span>: https://github.com/asottile/reorder_python_imports
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">rev</span>: v1.8.0
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">hooks</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ff79c6">id</span>: reorder-python-imports
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">name</span>: Reorder Python imports (src, tests)
+</span></span><span style="display:flex;"><span>  - <span style="color:#ff79c6">repo</span>: https://github.com/python/black
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">rev</span>: stable
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">hooks</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ff79c6">id</span>: black
+</span></span><span style="display:flex;"><span>  - <span style="color:#ff79c6">repo</span>: https://gitlab.com/pycqa/flake8
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">rev</span>: <span style="color:#bd93f9">3.7.9</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">hooks</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ff79c6">id</span>: flake8
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">additional_dependencies</span>: [flake8-bugbear]
+</span></span><span style="display:flex;"><span>  - <span style="color:#ff79c6">repo</span>: https://github.com/pre-commit/pre-commit-hooks
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">rev</span>: v2.4.0
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">hooks</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ff79c6">id</span>: check-byte-order-marker
+</span></span><span style="display:flex;"><span>      - <span style="color:#ff79c6">id</span>: trailing-whitespace
+</span></span><span style="display:flex;"><span>      - <span style="color:#ff79c6">id</span>: end-of-file-fixer
+</span></span></code></pre></div><p>Makefile:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-makefile" data-lang="makefile"><span style="display:flex;"><span><span style="color:#50fa7b">init</span><span style="color:#ff79c6">:</span>
+</span></span><span style="display:flex;"><span>	python3 -m venv .venv
+</span></span><span style="display:flex;"><span>	.venv/bin/pip install pre-commit
+</span></span><span style="display:flex;"><span>	.venv/bin/pre-commit install --install-hooks
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#50fa7b">clean</span><span style="color:#ff79c6">:</span>
+</span></span><span style="display:flex;"><span>	rm -rf .venv
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#50fa7b">.PHONY</span><span style="color:#ff79c6">:</span> init clean
+</span></span></code></pre></div><p>该方案受 <a href="https://github.com/pallets/flask/blob/master/CONTRIBUTING.rst">Flask 的 contributing guidelines</a> 启发。</p>
+]]></content:encoded></item><item><title>Docker 里的进程为什么没有处理 TERM 信号</title><link>https://jan365.org/posts/process-in-docker-does-not-handle-term/</link><pubDate>Mon, 02 Dec 2019 20:11:39 +0800</pubDate><guid>https://jan365.org/posts/process-in-docker-does-not-handle-term/</guid><description>现象 在一个部署在 Kubernetes 的项目里，每次重新部署的都会发现有两个 pods 处于 terminating 状态的时间特别长，于是着手分析这个问题。 Kubernetes 是如何关闭一个容器的？文档 Pods - Kubernetes 介</description><content:encoded><![CDATA[<h2 id="现象">现象</h2>
+<p>在一个部署在 Kubernetes 的项目里，每次重新部署的都会发现有两个 pods 处于 terminating 状态的时间特别长，于是着手分析这个问题。</p>
+<p>Kubernetes 是如何关闭一个容器的？文档 <a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/#termination-of-pods">Pods - Kubernetes</a> 介绍，Kubernetes 会向容器里的进程发 TERM 信号，如果进程在一定时间（默认30秒）内没有关闭，Kubernetes 会发 KILL 信号。</p>
+<p>猜想是因为进程没有处理 TERM 信号，在30秒超时后才被 KILL 信号关闭。验证猜想：</p>
+<pre tabindex="0"><code>$ time kubectl delete pod POD_NAME
+</code></pre><p>可以看到用时大概是30秒，一定程度上验证了这个猜想。再进一步，直接向进程发 TERM 信号：</p>
+<pre tabindex="0"><code>$ kubectl exec -it POD_NAME -- kill -TERM 1
+$ kubectl get pods
+</code></pre><p>Pod 还在，没有任何反应，可以验证进程没有处理 TERM 信号。</p>
+<p><strong>然而，shell 里直接运行程序，再发 TERM 信号，进程会马上关闭。<strong>那么现在问题是</strong>为什么进程在 Docker 里就不处理 TERM 信号了？</strong></p>
+<p>到这里，直觉告诉我们，在程序里显式处理 TERM 信号大概能解决问题。然而，我还是想知道为什么到了 Docker 环境情况会变得不一样。我们先来看看信号是如何工作的。</p>
+<h2 id="信号如何工作">信号如何工作</h2>
+<p>信号的处理有以下3种情况：</p>
+<ol>
+<li>如果进程注册了信号的处理函数，那么内核会调用相应的函数来处理；</li>
+<li>如果进程设置了忽略该信号，则内核直接忽略；</li>
+<li>如果进程设置了屏蔽该信号，则内核会放到队列里；</li>
+<li>对于部分信号，如果既没有注册处理函数，也没有忽略和屏蔽，则内核会有相应的默认处理，通过 <a href="http://man7.org/linux/man-pages/man7/signal.7.html">man 7 signal</a> 可以看到，<strong>TERM 的默认处理是关闭进程</strong>。</li>
+</ol>
+<p>我们可以在 <code>/proc/</code> 文件系统里观察进程的信号设置：</p>
+<pre tabindex="0"><code>$ kubectl exec POD_NAME -- grep Sig /proc/1/status
+
+SigQ:	0/15733
+SigPnd:	0000000000000000
+SigBlk:	0000000000000000
+SigIgn:	0000000001001000
+SigCgt:	0000000180000002
+</code></pre><p>SigBlk、SigIgn、SigCgt 分别是屏蔽、忽略和捕捉（即注册了处理函数）的mask，十六进制，转成二进制后，每一位对应一个信号编号。<code>kill -l</code> 可以列出信号编号对应的信号。</p>
+<p>**通过上面的信息可以发现编号15的 TERM 信号在3组 mask 里都没有，应该属于情况4，由内核默认处理，也就是关闭进程。**但是实际上并不符合预期。我们做一些实验分析。</p>
+<h2 id="分析">分析</h2>
+<p>为了简化问题，做了一些尝试后发现只需要在 docker 环境里跑 sleep 进程就能重现。</p>
+<pre tabindex="0"><code>$ docker run -it --rm -d alpine /bin/sleep 3600 # 创建一个容器，跑 sleep 进程
+
+44c2fa4ba13066e3b10f78484144fdc06bb87d132a87006a697521fa629e6f74
+
+$ docker exec -it 44c2fa4ba13066 /bin/sh  # 进入容器，跑 shell
+/ # grep Sig /proc/1/status # sleep 没有任何信号处理的设置
+
+SigQ:	0/7866
+SigPnd:	0000000000000000
+SigBlk:	0000000000000000
+SigIgn:	0000000000000000
+SigCgt:	0000000000000000
+
+/ # kill -TERM 1 # 向 sleep 进程发信号
+/ # ps -ef # 没有默认处理，没有关闭
+
+PID   USER     TIME  COMMAND
+    1 root      0:00 /bin/sleep 3600
+    7 root      0:00 /bin/sh
+   13 root      0:00 ps -ef
+</code></pre><p>是 Docker 在信号处理上做了一些特殊处理吗？从原理上分析是没有的，我们通过实验来验证，还是在上面的环境里，我们在 shell 后台跑一个 sleep 进程，再发信号试试。</p>
+<pre tabindex="0"><code>/ # sleep 1800 &amp;
+/ # ps -ef
+
+PID   USER     TIME  COMMAND
+    1 root      0:00 /bin/sleep 3600
+    7 root      0:00 /bin/sh
+   16 root      0:00 sleep 1800
+   17 root      0:00 ps -ef
+
+/ # kill -TERM 16
+/ #
+[1]+  Terminated                 sleep 1800
+</code></pre><p>这次 sleep 进程符合预期正常关闭了。那么原因很明显的，<strong>特殊的是 PID 1</strong>。</p>
+<h2 id="特殊的-pid-1">特殊的 PID 1</h2>
+<p><a href="http://man7.org/linux/man-pages/man2/kill.2.html#NOTES">man 2 kill</a> 告诉我们：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plaintext" data-lang="plaintext"><span style="display:flex;"><span>The only signals that can be sent to process ID 1, the init process,
+</span></span><span style="display:flex;"><span>are those for which init has explicitly installed signal handlers.
+</span></span><span style="display:flex;"><span>This is done to assure the system is not brought down accidentally.
+</span></span></code></pre></div><p>PID 1 进程通常是 systemd、init，扮演着重要的角色，对信号的处理是极其谨慎的，防止意外退出导致 <a href="https://en.wikipedia.org/wiki/Kernel_panic">Kernel panic</a>。然而在 docker 里，PID 1成了我们要运行的程序，但却享受着内核的特殊“保护”。</p>
+<h2 id="结论">结论</h2>
+<p>在 Docker 里，一定要显式处理 TERM 信号。</p>
+]]></content:encoded></item><item><title>如虎添翼！HHKB 增加蓝牙模块</title><link>https://jan365.org/posts/hhkb-bluetooth/</link><pubDate>Mon, 20 May 2019 20:05:04 +0800</pubDate><guid>https://jan365.org/posts/hhkb-bluetooth/</guid><description>HHKB(Happy Hacking Keyboard)相信程序员都会听说过，无须多说，看看 GNU 教主用 HHKB 的风采。 如果恰好你手中的 HHKB 也是教主这个型号，那么是没有蓝牙功能的。现有的</description><content:encoded><![CDATA[<p>HHKB(Happy Hacking Keyboard)相信程序员都会听说过，无须多说，看看 GNU 教主用 HHKB 的风采。</p>
+<p><img loading="lazy" src="stallman.jpg" alt="Richard Stallman"  />
+</p>
+<p>如果恰好你手中的 HHKB 也是教主这个型号，那么是没有蓝牙功能的。现有的选项是：</p>
+<ul>
+<li>A 官方有售蓝牙版；</li>
+<li>B 官方有售蓝牙适配器；</li>
+<li>C Hacking，改造手中的键盘!!!</li>
+</ul>
+<p>不用想，一定选 C。</p>
+<h2 id="hacking">Hacking</h2>
+<p>第一个做出 HHKB 蓝牙控制模块的人应该是 <a href="https://geekhack.org/index.php?topic=71517.0">hasu</a>了。关注了很久一直没有下单，主要原因是购买困难，首先要给作者发个邮件，然后等作者回邮 paypal 付款链接，付款后等作者从日本发货……</p>
+<p>一直关注淘宝，盼望着有国内的大神把火种带给中国人民。最近同事购入了蓝牙版的 HHKB，我又想起了这回事，上淘宝一搜，喜出望外，竟然真有大神做出来了，还是改进版！作者是 YANG，介绍可以看这里 <a href="http://help.ydkb.io/doku.php?id=kb-mods:hhkb-ble">http://help.ydkb.io/doku.php?id=kb-mods:hhkb-ble</a> ，购买链接也在里面。从介绍页面得知，优化的主要是省电这一块。</p>
+<p>焦急地等了一个多星期，终于到货了。拆开后和我的 HHKB 合影，左上是主控板，中上是电池，右上是额外的 usb 连接线，可以在键盘内内置一个U盘。</p>
+<p><img loading="lazy" src="IMG_7388.jpg" alt="开箱"  />
+</p>
+<p>安装过程非常简单，只需要螺丝刀，下图是 HHKB 拆开的样子。</p>
+<p><img loading="lazy" src="IMG_7389.jpg" alt="安装中"  />
+</p>
+<p>换上主控板，装上电池，完成。上电连接电脑，敲几下键盘，没问题就可以把外壳装回去了。装好之后完全看不出痕迹。</p>
+<p><img loading="lazy" src="IMG_7390.jpg" alt="安装完成"  />
+</p>
+<h2 id="mapping">Mapping</h2>
+<p>看到这里，你以为仅仅是给 HHKB 加上蓝牙这么简单吗？No no no. 这个主控板除了给 HHKB 加上蓝牙之外，还加入了强大的编程功能。原来在 MacOS 上我用 <a href="https://pqrs.org/osx/karabiner/">Karabiner</a> 改键，在 Windows 上用 <a href="https://github.com/randyrants/sharpkeys">SharpKeys</a>，现在这个工作可以转移到键盘里了。</p>
+<p>ydkb.io 的映射逻辑非常灵活。下图从 ydkb.io 引用而来，支持8层，每一层都可以设置一套按键。这些层不是单选的关系，而是层叠的关系，举个例子，打开了第1层，但是对应的按键没有配置，那么将会穿透到第0层对应按键上。</p>
+<p>利用这个特性，我们可以很容易实现 fn 键。只需要给 fn 组合建的功能都设置到一层里，然后把 fn 键作为该层的开关即可。这是最简单的用法，我们还可以实现更复杂的功能。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Keymap: 8 Layers                   Layer: 按键矩阵
+</span></span><span style="display:flex;"><span>-----------------                   ---------------------
+</span></span><span style="display:flex;"><span>     ____________ 优先级                   _______________________
+</span></span><span style="display:flex;"><span>    /           / | 高                    / ESC / F1  / F2  / F3   ....
+</span></span><span style="display:flex;"><span> 7 /___________// |                      /-----/-----/-----/-----
+</span></span><span style="display:flex;"><span> 6 /___________// |                     / TAB /  Q  /  W  /  E   ....
+</span></span><span style="display:flex;"><span> 5 /___________/  |                    /-----/-----/-----/-----
+</span></span><span style="display:flex;"><span> :   _:_:_:_:_:__ |               :   /LCtrl/  A  /  S  /  D   ....
+</span></span><span style="display:flex;"><span> :  / : : : : : / |               :  /  :     :     :     :
+</span></span><span style="display:flex;"><span> 2 /___________// |               2 `--------------------------
+</span></span><span style="display:flex;"><span> 1 /___________// |               1 `--------------------------
+</span></span><span style="display:flex;"><span> 0 /___________/  V 低            0 `--------------------------
+</span></span></code></pre></div><h2 id="我的配列">我的配列</h2>
+<p>HHKB 原生的配列有几处地方我一直不习惯，必须调整：</p>
+<ol>
+<li>退格与<code>|\</code>键的位置交换了；</li>
+<li><!-- raw HTML omitted -->~`<!-- raw HTML omitted --> 键不在1的左边。</li>
+</ol>
+<p>1好解决，轻松互换。2不好办，因为1的左边已经被<code>esc</code>占据，<code>esc</code>、<code>~</code>、<!-- raw HTML omitted -->`<!-- raw HTML omitted -->三个都是非常常用的键，怎样让它们在一个键上和平共处？</p>
+<p>首先，<code>~</code>是需要按<code>shift</code>输入，只要让<code>shift + esc = ~</code>即可，这个功能在 ydkb.io 里直接有提供。其次是 <!-- raw HTML omitted --> ` <!-- raw HTML omitted --> 键，这个按键我主要用在三个地方，频次从高到低分别是：</p>
+<ol>
+<li><!-- raw HTML omitted --> cmd + ` <!-- raw HTML omitted --> 在 MacOS 里是同应用不同窗口间的切换；</li>
+<li>markdown 的 fence code block；</li>
+<li>shell、sql 里用到。</li>
+</ol>
+<p>我打算只解决1，因为2、3不常用，可以继续用<code>=</code>右边的按键。解决办法是把 <code>cmd</code> 改成 <code>cmd &amp; 层1</code>，然后把 <!-- raw HTML omitted -->`<!-- raw HTML omitted --> 放到层1的<!-- raw HTML omitted -->esc<!-- raw HTML omitted -->上。</p>
+<p>这样，<code>cmd + esc</code> 就变成 <!-- raw HTML omitted -->cmd + `<!-- raw HTML omitted -->了。而 <!-- raw HTML omitted -->cmd + 其他<!-- raw HTML omitted -->则不受影响，因为其他键都留空，就会穿透到层0。</p>
+<p>最后，附上我的配列。</p>
+<p>Layer 0:
+<img loading="lazy" src="l0.png" alt=""  />
+</p>
+<p>Layer 1:
+<img loading="lazy" src="l1.png" alt=""  />
+</p>
+<p>Layer 2:
+<img loading="lazy" src="l2.png" alt=""  />
+</p>
+<p><strong>Happy hacking!</strong></p>
+]]></content:encoded></item><item><title>用 Pandoc + Reveal.js 写幻灯片</title><link>https://jan365.org/posts/pandoc-revealjs/</link><pubDate>Tue, 14 May 2019 20:45:01 +0800</pubDate><guid>https://jan365.org/posts/pandoc-revealjs/</guid><description>reveal.js 是一个 html 幻灯片框架，如果要写 html 幻灯片，这就是最好的选择了。Pandoc 是 Markup 格式之间转换的瑞士军刀。 为什么不用 PowerPoint 或者 Keynote？Pand</description><content:encoded><![CDATA[<p><a href="https://github.com/hakimel/reveal.js/">reveal.js</a> 是一个 html 幻灯片框架，如果要写 html 幻灯片，这就是最好的选择了。<a href="https://pandoc.org/">Pandoc</a> 是 Markup 格式之间转换的瑞士军刀。</p>
+<p><strong>为什么不用 PowerPoint 或者 Keynote？Pandoc + reveal.js Vs. PowerPoint/Keynote:</strong></p>
+<ul>
+<li>
+<p>Pros:</p>
+<ul>
+<li>专注于内容，而不是调样式；</li>
+<li>兼容性好，不需要专用软件来播放，只需要浏览器，几乎任何一台电脑都能胜任；</li>
+<li>开源。</li>
+</ul>
+</li>
+<li>
+<p>Cons:</p>
+<ul>
+<li>没有所见即所得的编辑器；</li>
+<li>动画效果弱；</li>
+<li>没有绘图功能（可以用其他软件画图导出后贴到幻灯片里）。</li>
+</ul>
+</li>
+</ul>
+<p>这是一个用Pandoc + reveal.js 生成的幻灯片<a href="slide_example.html">demo</a>。</p>
+<p>reveal.js 要用 html 来编写，虽然有着巨大的灵活性，但是相对来说比较繁琐。那么我们自然能想到用 markdown 来写 html，reveal.js 本身是支持 markdown 的，但是 Pandoc 更为专业，提供了对 reveal.js 的支持，且提供了很多方便的特性，如分栏、演讲者笔记、暂停、分批出现等。</p>
+<p>生成过程如下图所示。</p>
+<p><img loading="lazy" src="pandoc_revealjs.svg" alt=""  />
+</p>
+<h2 id="快速开始">快速开始</h2>
+<p>安装 pandoc（以 MacOS 为例）：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>brew install pandoc
+</span></span></code></pre></div><p>编写 <code>slides.md</code>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-markdown" data-lang="markdown"><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span>title: Html幻灯片
+</span></span><span style="display:flex;"><span>author: Zhen Zhijian
+</span></span><span style="display:flex;"><span>date: 2019-05-14
+</span></span><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="font-weight:bold"># Pandoc
+</span></span></span><span style="display:flex;"><span><span style="font-weight:bold"></span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">*</span> Pandoc是一个Markup格式转换工具
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">*</span> pandoc.org
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="font-weight:bold"># Reveal.js
+</span></span></span><span style="display:flex;"><span><span style="font-weight:bold"></span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">*</span> reveal.js是一个html幻灯片框架
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="font-weight:bold"># 结合
+</span></span></span><span style="display:flex;"><span><span style="font-weight:bold"></span>
+</span></span><span style="display:flex;"><span>md -&gt; pandoc -&gt; html(reveal.js)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="font-weight:bold"># 谢谢！
+</span></span></span></code></pre></div><p>没错，这就是上面的幻灯片的源码。生成 html 命令如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>pandoc -t revealjs -s -o slides.html slides.md
+</span></span></code></pre></div><p>打开生成的 <code>slides.html</code>，就可以做演示了。</p>
+<p>为了简化生成命令，可以用下面这个 Makefile。此外，生成幻灯片时会自动下载 reveal.js 和 katex，设置相应的参数。reveal.js 下载到本地，演示时可以不依赖网络。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-makefile" data-lang="makefile"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">OPTS</span> <span style="color:#ff79c6">=</span> -V <span style="color:#8be9fd;font-style:italic">history</span><span style="color:#ff79c6">=</span><span style="color:#8be9fd;font-style:italic">true</span> -V <span style="color:#8be9fd;font-style:italic">theme</span><span style="color:#ff79c6">=</span>black -V <span style="color:#8be9fd;font-style:italic">transition</span><span style="color:#ff79c6">=</span>slide -V <span style="color:#8be9fd;font-style:italic">transitionSpeed</span><span style="color:#ff79c6">=</span>fast
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#50fa7b">build</span><span style="color:#ff79c6">:</span> assets/reveal.js assets/katex
+</span></span><span style="display:flex;"><span>	pandoc -t revealjs -s -o slides.html -V revealjs-url<span style="color:#ff79c6">=</span>./assets/reveal.js --katex<span style="color:#ff79c6">=</span>./assets/katex/ <span style="color:#ff79c6">$(</span>OPTS<span style="color:#ff79c6">)</span> slides.md
+</span></span><span style="display:flex;"><span>	open slides.html
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#50fa7b">assets/reveal.js</span><span style="color:#ff79c6">:</span>
+</span></span><span style="display:flex;"><span>	mkdir -p assets
+</span></span><span style="display:flex;"><span>	curl -L https://github.com/hakimel/reveal.js/archive/master.tar.gz | tar -C assets -zxf -
+</span></span><span style="display:flex;"><span>	mv assets/reveal.js-master assets/reveal.js
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#50fa7b">assets/katex</span><span style="color:#ff79c6">:</span>
+</span></span><span style="display:flex;"><span>	mkdir -p assets
+</span></span><span style="display:flex;"><span>	curl -L https://github.com/KaTeX/KaTeX/releases/download/v0.10.2/katex.tar.gz | tar -C assets -zxf -
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#50fa7b">clean</span><span style="color:#ff79c6">:</span>
+</span></span><span style="display:flex;"><span>	rm -rf assets slides.html
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#50fa7b">.PHONY</span><span style="color:#ff79c6">:</span> build clean
+</span></span></code></pre></div><h2 id="pandoc-的-markdown-扩展">Pandoc 的 Markdown 扩展</h2>
+<p>Markdown 格式较为简单，能做的事情仅限于此吗？不是的，Pandoc 对 Markdown 做了<a href="https://pandoc.org/MANUAL.html#pandocs-markdown">扩展</a>，以下介绍两个特性。</p>
+<h3 id="自定义-css">自定义 css</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-css" data-lang="css"><span style="display:flex;"><span><span style="color:#6272a4">/* custom.css */</span>
+</span></span><span style="display:flex;"><span>.<span style="color:#50fa7b">highlight</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">color</span>: <span style="color:#ff79c6">red</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>在 slides.md 里应用这个样式：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-md" data-lang="md"><span style="display:flex;"><span><span style="font-weight:bold"># 应用样式
+</span></span></span><span style="display:flex;"><span><span style="font-weight:bold"></span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">*</span> foo
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">*</span> [高亮]{.highlight}
+</span></span></code></pre></div><p>用 <code>--css</code> 参数，引入自定义 css（如果要用上面提供的 Makefile 生成，只需要把 <code>--css</code> 参数加到 OPTS 里即可）：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>pandoc --css custom.css -t revealjs -s -o slides.html slides.md
+</span></span></code></pre></div><p>生成结果：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#ff79c6">section</span> <span style="color:#50fa7b">id</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;应用样式&#34;</span> <span style="color:#50fa7b">class</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;slide level1&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#ff79c6">h1</span>&gt;应用样式&lt;/<span style="color:#ff79c6">h1</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#ff79c6">ul</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#ff79c6">li</span>&gt;foo&lt;/<span style="color:#ff79c6">li</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#ff79c6">li</span>&gt;&lt;<span style="color:#ff79c6">span</span> <span style="color:#50fa7b">class</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;highlight&#34;</span>&gt;高亮&lt;/<span style="color:#ff79c6">span</span>&gt;&lt;/<span style="color:#ff79c6">li</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#ff79c6">ul</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#ff79c6">section</span>&gt;
+</span></span></code></pre></div><p>可以看出，<code>[]{.class}</code>会创建一个<code>&lt;span&gt;</code>，并应用class。</p>
+<h3 id="分栏">分栏</h3>
+<p>幻灯片的空间紧张，分栏是充分利用的空间的一个办法。Reveal.js 本身没有提供分栏的支持，但是 Pandoc 有分栏的扩展。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-md" data-lang="md"><span style="display:flex;"><span><span style="font-weight:bold"># 分栏
+</span></span></span><span style="display:flex;"><span><span style="font-weight:bold"></span>
+</span></span><span style="display:flex;"><span>:::: {.columns}
+</span></span><span style="display:flex;"><span>::: {.column width=&#34;40%&#34;}
+</span></span><span style="display:flex;"><span>分栏 1
+</span></span><span style="display:flex;"><span>:::
+</span></span><span style="display:flex;"><span>::: {.column width=&#34;60%&#34;}
+</span></span><span style="display:flex;"><span>分栏 2
+</span></span><span style="display:flex;"><span>:::
+</span></span><span style="display:flex;"><span>::::
+</span></span></code></pre></div><p>渲染结果：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#ff79c6">section</span> <span style="color:#50fa7b">id</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;分栏&#34;</span> <span style="color:#50fa7b">class</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;slide level1&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#ff79c6">h1</span>&gt;分栏&lt;/<span style="color:#ff79c6">h1</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#ff79c6">div</span> <span style="color:#50fa7b">class</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;columns&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#ff79c6">div</span> <span style="color:#50fa7b">class</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;column&#34;</span> <span style="color:#50fa7b">style</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;width:40%;&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#ff79c6">p</span>&gt;分栏 1&lt;/<span style="color:#ff79c6">p</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;/<span style="color:#ff79c6">div</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#ff79c6">div</span> <span style="color:#50fa7b">class</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;column&#34;</span> <span style="color:#50fa7b">style</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;width:60%;&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#ff79c6">p</span>&gt;分栏 2&lt;/<span style="color:#ff79c6">p</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;/<span style="color:#ff79c6">div</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#ff79c6">div</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#ff79c6">section</span>&gt;
+</span></span></code></pre></div><p>补充说明一点，3个以上<code>:</code>会创建一个<code>&lt;div&gt;</code>，超过3个只是为了方便看配对，可以根据自己的喜好来。</p>
+<h2 id="whats-next">What&rsquo;s Next</h2>
+<p>准备用这个组合写幻灯片了吗？接下来可以一边写，一边看看 Pandoc 和 reveal.js 的文档。不妨重点看看 Pandoc 对 markdown 的扩展，以及与 reveal.js 相关的内容。</p>
+<p>Pandoc: <a href="https://pandoc.org/MANUAL.html">https://pandoc.org/MANUAL.html</a></p>
+<p>reveal.js: <a href="https://github.com/hakimel/reveal.js/">https://github.com/hakimel/reveal.js/</a></p>
+]]></content:encoded></item><item><title>鼠须管输入法的五笔输入配置</title><link>https://jan365.org/posts/squirrel/</link><pubDate>Sun, 21 Apr 2019 11:13:07 +0800</pubDate><guid>https://jan365.org/posts/squirrel/</guid><description>我用过的 MacOS 下的各种五笔输入法有： 系统自带五笔 QQ五笔 搜狗五笔 鼠须管（开源） 清歌五笔（免费，已捐款） 落格输入法（付费） 这几年用了一圈下来，我还</description><content:encoded><![CDATA[<p>我用过的 MacOS 下的各种五笔输入法有：</p>
+<ul>
+<li>系统自带五笔</li>
+<li>QQ五笔</li>
+<li>搜狗五笔</li>
+<li>鼠须管（开源）</li>
+<li>清歌五笔（免费，已捐款）</li>
+<li>落格输入法（付费）</li>
+</ul>
+<p>这几年用了一圈下来，我还是回到了鼠须管输入法。为什么呢？我先说说其他输入法让我不满意的地方。系统自带五笔我最不能接受的是不支持 emacs 风格光标移动——ctrl+b：后退，ctrl+f：前进，还有ctrl+p、n、e、a等等，然而，在英文、拼音输入状态下都支持。QQ五笔、搜狗五笔定制性太差，不顺手的设定也调节不了。清歌五笔的定制性也不高，但是默认就比较顺手，缺点是词库不能替换，虽然原版的就已经很不错。落格输入法支持多种输入法，五笔只是其中之一，可以替换词库，但是定制性的功能不够强大，比如想用拼音反查五笔编码就做不到。</p>
+<p>一圈下来我也了解了自己的需求：</p>
+<ul>
+<li>可以自定义词库</li>
+<li>不影响 emacs 风格光标移动</li>
+<li>临时拼音输入，且带五笔编码反查</li>
+<li>自定义输入习惯，如四码唯一上屏，五码顶字上屏，分号、单引号选二三候选字，空码按空格清空等等</li>
+</ul>
+<p>想要最灵活的定制，最强大的功能，选择必然是鼠须管了。然而鼠须管的缺点也相当明显，配置难度非常高，尤其是在一两年前，还得自己编译出最新版。幸好最近作者又再发力，易用性有了一定的提高。不过就目前的情况看来，要用鼠须管，最好你是一名程序员，或者至少是名专业用户。</p>
+<h2 id="安装">安装</h2>
+<p>用 brew 安装非常简单。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>brew cask install squirrel
+</span></span></code></pre></div><p>鼠须管默认没有五笔，官方提供了一个工具——东风破，用于安装输入方案：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git clone https://github.com/rime/plum.git
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">cd</span> plum
+</span></span><span style="display:flex;"><span>bash rime-install wubi pinyin-simp
+</span></span></code></pre></div><p>五笔依赖 pinyin-simp 做拼音反查，所以这里一并安装了。</p>
+<p>接下来我们还需要把五笔配置到输入法选单里，新建或修改以下文件。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#6272a4"># ~/Library/Rime/default.custom.yaml</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">patch</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">schema_list</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#ff79c6">schema</span>: wubi86
+</span></span></code></pre></div><p>在输入菜单里点部署，到现在鼠须管被配置成五笔输入法了。</p>
+<p>然而，当你打了一段时间之后，你会发现这个五笔有点问题。这个 <a href="https://github.com/rime/rime-wubi/pull/3">pr</a> 里描述得很清楚，摘录一小段：</p>
+<blockquote>
+<ul>
+<li>utem 第一位是 <code>顔</code>，第二位才是 <code>颜</code></li>
+<li>tvfh 第一位是 <code>筆</code>，第二位才是 <code>律</code></li>
+</ul>
+</blockquote>
+<p>可惜作者没有接纳这个 pr。但是鼠须管本来就具有超高的定制性，别说改五笔码表了，创造自己的输入法都行。那么我们现在要做的是修改五笔的码表（可以称为词库），方法很简单，看看<code>~/Library/Rime/wubi86.dict.yaml</code>的内容，格式很简单，换成自己喜欢的词库就行。</p>
+<p>如果你没有特别喜欢的词库或者不想制作词库，那么也可以用上面 pr 提供的库词，会是个不错的选择。</p>
+<h2 id="定制">定制</h2>
+<p><code>~/Library/Rime/wubi86.custom.yaml</code>文件可以针对五笔输入方案定制，分享我的定制：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#6272a4"># ~/Library/Rime/wubi86.custom.yaml</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">patch</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">translator/enable_user_dict</span>: <span style="color:#ff79c6">false</span> <span style="color:#6272a4"># 关闭词频调整</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">translator/enable_sentence</span>: <span style="color:#ff79c6">false</span> <span style="color:#6272a4"># 关闭句子输入</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">translator/enable_completion</span>: <span style="color:#ff79c6">false</span>  <span style="color:#6272a4"># 关闭逐键提示</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">speller/max_code_length</span>: <span style="color:#bd93f9">4</span> <span style="color:#6272a4"># 最长4码</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">speller/auto_select</span>: <span style="color:#ff79c6">true</span> <span style="color:#6272a4"># 顶字上屏</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">speller/auto_select_unique_candidate</span>: <span style="color:#ff79c6">true</span> <span style="color:#6272a4"># 无重码自动上屏</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">speller/auto_clear</span>: max_length <span style="color:#6272a4"># 空码且達到最長碼時確認清屏 https://github.com/rime/librime/issues/60#issuecomment-153245010</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">key_binder/bindings</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4"># 分号、单引号上屏幕二三候选词</span>
+</span></span><span style="display:flex;"><span>    - {<span style="color:#ff79c6">when: has_menu, accept: semicolon, send</span>: <span style="color:#bd93f9">2</span>}
+</span></span><span style="display:flex;"><span>    - {<span style="color:#ff79c6">when: has_menu, accept: apostrophe, send</span>: <span style="color:#bd93f9">3</span>}
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4"># 空碼時按空格鍵清空輸入碼</span>
+</span></span><span style="display:flex;"><span>    - {<span style="color:#ff79c6">when: has_menu, accept: space, send</span>: space}
+</span></span><span style="display:flex;"><span>    - {<span style="color:#ff79c6">when: composing, accept: space, send</span>: Escape}
+</span></span></code></pre></div><p>鼠须管默认配置在中文输入时，有些标点符号会出现选单，比如输入[，会出现<code>「, 【, 〔, ［</code>供选择，我感觉很影响效率，标点符号的输入我都希望能直接出结果。配置方法也很简单，默认的标点符号配置在<code>/Library/Input Methods/Squirrel.app/Contents/SharedSupport/punctuation.yaml</code>文件里，复制一份，修改好，放到<code>~/Library/Rime/default.custom.yaml</code>的 patch 里即可。</p>
+<h2 id="理解鼠须管的配置原理">理解鼠须管的配置原理</h2>
+<p>前面我们创建和配置了几个配置文件，那么为什么是这些文件，这些文件是怎样工作的？</p>
+<p>首先鼠须管软件带的默认配置文件都在<code>/Library/Input Methods/Squirrel.app/Contents/SharedSupport/</code>里，这里的文件是不能改的，需要修改这里面的配置，就需要在<code>~/Library/Rime/</code>里建立相应的文件来打补丁。一般需要修改的配置文件有<code>default.yaml</code>和<code>squirrel.yaml</code>，对应的文件是<code>default.custom.yaml</code>和<code>squirrel.custom.yaml</code>。而针对输入方案的配置文件则是<code>方案名.custom.yaml</code>，比如五笔就是<code>wubi86.custom.yaml</code>了。</p>
+<p>接下来需要考虑的是定制文件里怎样打补丁了，用一个例子做说明，<code>~/Library/Rime/wubi86.schema.yaml</code>里有如下片段。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#ff79c6">translator</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">dictionary</span>: wubi86
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">enable_charset_filter</span>: <span style="color:#ff79c6">true</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">enable_sentence</span>: <span style="color:#ff79c6">true</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">enable_encoder</span>: <span style="color:#ff79c6">true</span>
+</span></span><span style="display:flex;"><span>  ...
+</span></span></code></pre></div><p>我们想把<code>enable_sentence</code>改成<code>false</code>，那么补丁可以这样写：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#6272a4"># ~/Library/Rime/wubi86.custom.yaml</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">patch</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">translator/enable_sentence</span>: <span style="color:#ff79c6">false</span> <span style="color:#6272a4"># 关闭句子输入</span>
+</span></span></code></pre></div><p>领悟一下，详细还是看<a href="https://github.com/rime/home/wiki/CustomizationGuide">文档</a>吧。</p>
+<p>怎样调试？要看看我们的补丁打得对不对，可以在部署之后看<code>~/Library/Rime/build/</code>目录里对应的文件，这些是打完补丁后最终生成的文件。</p>
+]]></content:encoded></item><item><title>迁移到 Hugo</title><link>https://jan365.org/posts/migration/</link><pubDate>Sat, 20 Apr 2019 19:10:58 +0800</pubDate><guid>https://jan365.org/posts/migration/</guid><description>从 Jekyll 到 hexo，现在又迁移到 Hugo 了。在我看来，Hugo 的优势是不需要安装一大堆依赖，安装完 Hugo 本身之后马上就可以用了。 写了个简单的 Makefil</description><content:encoded><![CDATA[<p>从 Jekyll 到 hexo，现在又迁移到 Hugo 了。在我看来，Hugo 的优势是不需要安装一大堆依赖，安装完 Hugo 本身之后马上就可以用了。</p>
+<p>写了个简单的 Makefile，方便操作，也防止忘记了 hugo 命令和流程。其中，deploy 参考了 Hugo 提供的托管到 github 的最佳实践：https://gohugo.io/hosting-and-deployment/hosting-on-github/ 。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-makefile" data-lang="makefile"><span style="display:flex;"><span><span style="color:#50fa7b">.PHONY</span><span style="color:#ff79c6">:</span> help new serve deploy
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#50fa7b">help</span><span style="color:#ff79c6">:</span>
+</span></span><span style="display:flex;"><span>	@echo make new
+</span></span><span style="display:flex;"><span>	@echo make serve
+</span></span><span style="display:flex;"><span>	@echo make deploy
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#50fa7b">new</span><span style="color:#ff79c6">:</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#6272a4"># Even theme use post/ instead of posts/</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#8be9fd;font-style:italic">read</span> -p <span style="color:#f1fa8c">&#39;Name:&#39;</span> name <span style="color:#ff79c6">&amp;&amp;</span> hugo new post/<span style="color:#8be9fd;font-style:italic">$$</span><span style="color:#ff79c6">{</span>name<span style="color:#ff79c6">}</span>.md
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#50fa7b">serve</span><span style="color:#ff79c6">:</span>
+</span></span><span style="display:flex;"><span>	hugo server -D
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#50fa7b">deploy</span><span style="color:#ff79c6">:</span>
+</span></span><span style="display:flex;"><span>	hugo
+</span></span><span style="display:flex;"><span>	<span style="color:#8be9fd;font-style:italic">cd</span> public <span style="color:#ff79c6">&amp;&amp;</span> git add . <span style="color:#ff79c6">&amp;&amp;</span> git commit -m <span style="color:#f1fa8c">&#39;rebuild&#39;</span> <span style="color:#ff79c6">&amp;&amp;</span> git push
+</span></span></code></pre></div>]]></content:encoded></item><item><title>2016年再学五笔输入法</title><link>https://jan365.org/posts/learning-wubi-again-in-2016/</link><pubDate>Sun, 12 Feb 2017 20:53:00 +0800</pubDate><guid>https://jan365.org/posts/learning-wubi-again-in-2016/</guid><description>总结2016年的收获，学会五笔算其中一大收获。汇报一下学到什么程度，工作生活使用没有问题，已经完全从拼音输入法转换到五笔了。 1. 历程 现在还学五</description><content:encoded><![CDATA[<p>总结2016年的收获，学会五笔算其中一大收获。汇报一下学到什么程度，工作生活使用没有问题，已经完全从拼音输入法转换到五笔了。</p>
+<p><img loading="lazy" src="wubizigenbiao86.gif" alt="五笔字根"  />
+</p>
+<h2 id="1-历程">1. 历程</h2>
+<p>现在还学五笔有什么用？相信很多人会问这个问题。但是“没用”的事情多了去了，看电视节目有什么用？上网有什么用？玩游戏有什么用？刷朋友圈有什么用？看电影有什么用？我能问一天。如果你有做以上说的这些事情，你可能会回答出有什么用，比如“能让自己感到高兴”就是一个很个人的又合理的答案。这些“没用”的事情是一些非必要的事情，<strong>对自己来说有些价值</strong>。我只能说学五笔对我来说有用，有什么用？下文会提到。</p>
+<h3 id="11-跨度之大">1.1. 跨度之大</h3>
+<p>学习五笔的跨度长达<strong>20年</strong>之久。</p>
+<p>1995年，小学三年级的我得到了一台二手的小霸王学习机，在上面我学习了英文打字的指法，五笔打字，GW-Basic 编程语言。1997年，购入了一台586电脑，CPU 是奔腾 MMX。</p>
+<p>在那时候，我学五笔的唯一教材就是小霸王的说明书。现在看来，这说明书是相当良心了，五笔的规则、助记词全都有，还收录了不少常用字供查询。在那个没有互联网的年代，这样的资料真是弥足珍贵。那时我还偷偷把字根助记词抄下来，带到学校早读的时候背。</p>
+<p>为什么要学五笔，在那个时候就不是一个问题。那时候“会不会打字”与“会不会电脑”基本是等价的，打字员还是一个很牛的职业，据传最牛的打字员在 Call 台（bp 机可以接收中文信息），打字速度80汉字/分钟才能入职，只有五笔能达到这样的速度。而且，那时候拼音输入法太难用，就算不是专业打字员，想要舒服地输入中文，还得学五笔。</p>
+<p><strong>规则我都学会了，助记词也记下了，但我还是没有学会五笔。</strong> 没有互联网的年代，学习资料很难找，也没有人交流，一个字不知道怎样拆就是没有办法，后来找到收录了更多字的五笔字典，也只能查到怎么打，具体怎样拆字有时候还真的搞不懂。不像现在，到 52wubi<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> 上一查就都清楚了。那时五笔的水平就是磕磕碰碰地能打一些，速度极慢，离实用还很远。搞笑的是，我这半桶水都不到的水平还教会了一些人五笔，真是“师父带入门，修行靠个人”。</p>
+<p>后来用上了电脑，有智能ABC输入法，拼音打字也没有那么难受了，在 OICQ（QQ ）上用拼音慢慢打字交流还是可以的。那时候输入法还是百家争鸣的，五笔没掌握，我还试用了一些其他输入法，比如郑码、自然码、二笔……个人感觉都没有比五笔好学，也没有比五笔好使。</p>
+<p>后来，<strong>智能狂拼<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>横空出世，这是一个划时代的产品。</strong> 拼音输入法进入了整句输入时代，智能狂拼的准确率非常高，无论是IM交流还是打文章，都非常流畅，中文输入再也不是一个障碍。这时候就更没有学五笔的动力了。</p>
+<p>可惜的是，智能狂拼已经终止开发。很多人知道后来的各种整句输入法，但是知道智能狂拼可能不多。<em>智能狂拼对比现在的整句输入法有一个优势——输入完整句拼音后不需要从头开始确认，可以直接定位到需要选字的音节直接修改。</em></p>
+<p>现在拼音输入法有了很大的进步，尤其是各种云输入法，如搜狗、谷歌、百度，整句输入的正确率很高。而拼音对很多人来说是已经掌握的技能，义务教育就给培养好了，几乎也没有学习成本，人们更加没有动力学习五笔了。不过据说现在银行还是要考核中文打字速度的，还是打百家姓，不是五笔过不了。</p>
+<h3 id="12-重拾五笔">1.2. 重拾五笔</h3>
+<p>重新开始学习五笔，有几个方面的原因。长期来说，这个没有完成的学习进程，一直萦绕在心头。而导火索是两个：</p>
+<ul>
+<li>云输入法会把输入数据发到云端，有可能泄漏隐私；</li>
+<li>整句输入的拼音输入法<strong>影响节奏</strong>，而且<strong>颈椎痛</strong>。</li>
+</ul>
+<p>前者不言自明，后者这里解释一下。整句输入，我们会飞快敲入整句拼音，然后如果运气好，所有字都准确，按一下空格就上屏了。不幸的是，很多时候总会有一些字不对，需要选字。这时候就要停下来，从头开逐字（词）确认或选择，有时还得在同音字里翻页找。有时候只是最后的几个字错了，也得从头开始确认。最让人沮丧的是，一旦选错还不能退，得从头来过。输入的节奏是——飞快地敲入整句拼音——停下来盯着屏幕逐字（词）确认修正——又飞快地敲入下一句……<strong>一顿一顿的节奏非常影响思路</strong>，有时为了连贯性，我不得不放弃整句输入，改为按词输入，但是这样整句输入的优势就荡然无存。</p>
+<p><strong>为什么会颈椎痛？</strong> 这不是开玩笑。敲入整句拼音的时候是一种盲打状态，不用看键盘，也不用看屏幕，非常舒服；然后要选字了，得盯着屏幕，这时颈部肌肉会紧张起来，而且还会不自觉地凑近屏幕。长期这样颈椎经常痛。</p>
+<p>而五笔则没有这样的问题，不依赖云，熟练的情况下全程盲打，颈部肌肉不紧张。</p>
+<h3 id="13-撸起袖子加油干">1.3. 撸起袖子加油干</h3>
+<p>既然决定要拿下五笔，那么得有计划怎么学。搜索了很多学习经验，发现这么多年过去了还是没有什么新鲜事，五笔的知识东西就那么多——规则和字根。我缺的是什么呢？<strong>熟练度</strong>，包括两个方面：</p>
+<ul>
+<li>熟悉字根所在的键位；</li>
+<li>熟悉每一个字的拆法。</li>
+</ul>
+<p>助记词还没有忘记，字根在哪个键位基本都知道，只是有些生僻的不熟悉，把文章开头的字根表打印出来放在桌面上，随时查看；每一个字的拆法可以按照规则推导，但是“熟悉”应该是要条件反射般即时反应过来。<strong>到了最后，什么字根、拆字都不需要了，所谓“无招胜有招”，“肌肉记忆”，完全不用思考，想到什么字，手指已经打出来。</strong></p>
+<p><strong>撸起袖子加油干。</strong> 多练自然熟悉。日常生活和工作直接切换到五笔显然不行，太影响效率。因此我安排了专门的训练，打什么材料好，能一边打一边学点知识的最好。我选择《论语》，练打字的同时倾听圣贤教诲，性价比太高了！此外，《唐诗三百首》《宋词三百首》也很棒。只是《论语》还没有打完，我的熟练度已经可以实战了，这时切换到日常中使用提升更快。</p>
+<p>一、二、三级简码是五笔提速一个重点，怎么记？一级简码只有25个字，很容易背下来；二、三级简码就不背了，在打字的过程中敲两键就出来的是二级简码，敲三键就出来的是三级简码，直接按空格上屏吧，练多了自然就能记住。</p>
+<h2 id="2-感悟">2. 感悟</h2>
+<p><strong>有些技能是需要反复练习的。</strong> 我偏好技能是通过理解来习得的，比如理解了勾股定理，就能计算所有三角型的面积。但是有些技能不是理解就能习得的，还需要一定量的练习。五笔就是这样一个技能，规则非常简单，但是都理解了也没有用，必须练习到一定的熟练度才实用。</p>
+<p><strong>不要太纠结设计不完美的地方</strong> 五笔的设计很精妙，从超低的重码率就能看出来。但是总有一些不完美的地方，比如有些字的拆法是违反规则的。我以前非常纠结这个，也跟一些五笔使用者交流过，他们都告诉我“记住就是了”。现在想来，这些例外情况都是有原因比如避免重码。不必纠结，作者肯定也权衡过利弊。</p>
+<p><strong>循序渐进，别追求一步到位。</strong> 以前我总想着要盲打，不能看候选字，不能看提示……这样多让人沮丧啊，很打击积极性，坚持不下去。其实从实用出发，循序渐进，学习曲线平缓点，经常能感受到进步，这样更利于学习。</p>
+<p><strong>挑战自己，离开舒适区，会有收获。</strong></p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p><a href="https://52wubi.com/">https://52wubi.com/</a>&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p><a href="https://zh.wikipedia.org/wiki/%E6%99%BA%E8%83%BD%E7%8B%82%E6%8B%BC">https://zh.wikipedia.org/wiki/%E6%99%BA%E8%83%BD%E7%8B%82%E6%8B%BC</a>&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+]]></content:encoded></item><item><title>mpv：视频播放器推荐</title><link>https://jan365.org/posts/mpv-recommended-video-player/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://jan365.org/posts/mpv-recommended-video-player/</guid><description>多年来在 Mac 一直用 MPlayerX 播放器，从名字就能看出是基于大名鼎鼎的 MPlayer。然而，近日访问MPlayer官网 1，赫然发现 MPlayerX 包含 malware（恶</description><content:encoded><![CDATA[<p>多年来在 Mac 一直用 MPlayerX 播放器，从名字就能看出是基于大名鼎鼎的 MPlayer。然而，近日访问MPlayer官网 <sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>，赫然发现 MPlayerX 包含 malware（恶意软件），并做了防探测的措施。</p>
+<blockquote>
+<p>MPlayerX (a fork of MPlayer for OSX) was found to have malware bundled with its installer.
+More information can be found at <a href="https://blog.malwarebytes.com/threat-analysis/2016/09/pup-friday-mplayerx/">malware bytes blog</a>.</p>
+</blockquote>
+<p>细看是证据确凿，MPlayerX 不值得信任了！寻找另一个好用的播放器成了当务之急。</p>
+<p>从 MPlayer 的推荐列表里发现了 mpv<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>，真是让人眼前一亮，相见恨晚！如果你是一个 geek，相信你会迫不及待想试用一番。另外，mpv是跨平台的，Windows 和 Linux 同样能用。</p>
+<p><img loading="lazy" src="mpv.png" alt="mpv screenshot"  />
+</p>
+<h2 id="1-活跃的开源项目">1. 活跃的开源项目</h2>
+<p>看看mpv的github <sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>，watch 300多，star 接近5,000，fork 650，近一周 master 分支有24个 commits。如此活跃的项目，如此多的贡献者，可以想象大量的 bug 将被及时修复，大量的特性也会被实现。</p>
+<p>为什么要开发 mpv，他们在 github上这样说：</p>
+<blockquote>
+<p>mpv was forked because we wanted to modernize MPlayer. This includes removing cruft (including features which stopped making sense 10 years ago), and of course adding modern features.</p>
+</blockquote>
+<p>基于 MPlayer，拥有跟 Mplayer 一样的解码能力，还有现代化的特性，是不是很期待？</p>
+<h2 id="2-quick-start">2. Quick Start</h2>
+<p>在 mac 上安装 mpv 非常简单，用 brew 直接安装即可：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ brew install mpv
+</span></span></code></pre></div><p>安装之后，就可以直接在终端里打开视频文件了。是不是很 geek？</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ mpv 西部世界.Westworld.S01E01.中英字幕.WEB-HR.AAC.1024X576.x264.mp4
+</span></span></code></pre></div><p>如果觉得总要在终端里打开有点麻烦，那么可以加上<code>--with-bundle</code>参数安装，除了命令行工具外还有一个 app，可以直接双击播放啦。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ brew install --with-bundle mpv
+</span></span></code></pre></div><h2 id="3-用户体验">3. 用户体验</h2>
+<p>播放界面如果文章开头的截图非常简洁，除了标题栏没有任何界面元素。人机交互领域有个界面与内容比例，最好的界面是没有界面，因为用户需要的是内容，界面只是用来交互，不占用宝贵的屏幕空间，不分散用户注意力的设计最佳。mpv 怎么交互，一是鼠标移上去后有叠加的界面，二是手势。</p>
+<h2 id="4-定制性">4. 定制性</h2>
+<p>有些 geek 们比较关注定制性。mpv 没有设置界面，有两个方法设置：</p>
+<ul>
+<li>命令行参数</li>
+<li>配置文件</li>
+</ul>
+<p>是不是很棒？相比在设置界面里点来点去好多了！附上文档<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>。</p>
+<h2 id="5-写在最后">5. 写在最后</h2>
+<p>mpv 目前还是比较 geek，终端、命令行参数、配置文件这些对于 Mac 和 Linux 用户应该没有问题；但是对于用 Windows 而且是普通用户，则不够友好，相信会有人在 mpv 的基础上再封装一下，配上一个设置界面就够了。</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p><a href="http://mplayerhq.hu/design7/news.html">http://mplayerhq.hu/design7/news.html</a>&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p><a href="https://mpv.io">https://mpv.io</a>&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p><a href="https://github.com/mpv-player/mpv">https://github.com/mpv-player/mpv</a>&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4">
+<p><a href="https://mpv.io/manual/stable/#options">https://mpv.io/manual/stable/#options</a>&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+]]></content:encoded></item></channel></rss>
